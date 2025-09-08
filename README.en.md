@@ -26,7 +26,7 @@ This repository manages custom instructions for Cursor.
 ## Usage
 
 1. If `.cursor/rules` does not exist yet, create the folder.
-2. If the path exists, save `v5.mdc` there.
+2. If the path exists, save `v5.en.mdc` there.
 - Because its application condition is "always", it will be referenced in subsequent chats as long as it exists at the designated path.
 - An English version `v5.en.mdc` is also provided. Both Japanese and English versions are set to `alwaysApply: true`, so you may want to adjust this setting based on your preferred language.
 
