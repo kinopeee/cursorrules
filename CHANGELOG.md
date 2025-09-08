@@ -1,5 +1,7 @@
 # CHANGELOG
 
+[English](CHANGELOG.en.md) | 日本語
+
 このファイルでは、cursorrules v5 プロジェクトの更新履歴を記録しています。
 
 ## バージョン3 (2025-08-30)

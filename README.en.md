@@ -1,5 +1,7 @@
 # cursorrules "v5"
 
+English | [日本語](README.md)
+
 This repository manages custom instructions for Cursor.
 
 ## Premise

@@ -1,8 +1,10 @@
 # CHANGELOG
 
+English | [日本語](CHANGELOG.md)
+
 This file records the update history of the cursorrules v5 project.
 
-## Version 3 (2024-08-30)
+## Version 3 (2025-08-30)
 
 ### Highlights
 

@@ -1,5 +1,7 @@
 # cursorrules 「v5」
 
+[English](README.en.md) | 日本語
+
 このリポジトリは、Cursor用のカスタムインストラクションを管理するためのものです。
 
 ## 前提
