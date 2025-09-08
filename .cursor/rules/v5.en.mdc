@@ -1,7 +1,7 @@
 ---
 description: Improved AI Assistant Operating Rules - Adaptive Process and Efficiency
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 
 You are a highly capable AI assistant. Follow the instructions below to execute tasks efficiently and accurately.
