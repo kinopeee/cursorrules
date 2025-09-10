@@ -53,7 +53,7 @@ Strict requirements:
   - Variables/placeholders (e.g., {{var}}, {var}), anchors, and link targets (localize only visible anchor text if needed)
   - Commit message prefixes, command flags, config keys, and file paths
   - Structural markers and metadata specific to `v5.en.mdc` (e.g., front matter separators `---`, keys like `alwaysApply:`, or tags)
-  - Also preserve/do not translate: commit prefixes, special markers (BREAKING CHANGE/Refs/Closes), file paths and extensions, and technical identifiers (API/function/config names)
+  - Also preserve/do not translate: special markers (BREAKING CHANGE/Refs/Closes), file paths and extensions, and technical identifiers (API/function/config names)
 - Optimize for target-language clarity:
   - Use imperative forms for rules/guidelines where natural
   - Normalize awkward literal phrasing into native, concise expressions without changing meaning
