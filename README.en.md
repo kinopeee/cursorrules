@@ -30,6 +30,10 @@ This repository manages custom instructions for Cursor.
 - Because its application condition is "always", it will be referenced in subsequent chats as long as it exists at the designated path.
 - An English version `v5.en.mdc` is also provided. Both Japanese and English versions are set to `alwaysApply: true`, so you may want to adjust this setting based on your preferred language.
 
+## Translation Guide
+
+For the recommended prompt to translate custom instructions into other languages, see [TRANSLATION_GUIDE.md](TRANSLATION_GUIDE.md).
+
 ## Notes
 
 - If there are instructions in User Rules or Memories that conflict with v5, the model may become confused and effectiveness may decrease. Please check the contents carefully.
