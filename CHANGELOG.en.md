@@ -4,6 +4,16 @@ English | [日本語](CHANGELOG.md)
 
 This file records the update history of the cursorrules v5 project.
 
+## Version 4 (2025-11-15)
+
+### Highlights
+
+#### 1. GPT-5.1 optimization
+
+- Introduced a prompt layer that maximizes GPT-5.1 inference accuracy
+- Refined instruction priority parsing to catch contradictions earlier
+- Improved response stability with throttle controls tuned for GPT-5.1 constraints
+
 ## Version 3 (2025-08-30)
 
 ### Highlights
