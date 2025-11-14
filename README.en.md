@@ -14,8 +14,7 @@ This repository manages custom instructions for Cursor.
 
 - After the release of Cursor's agent features, I noticed a recurring issue: insufficient analytical rigor. I began crafting custom instructions to better draw out the model's inherent analytical ability (originally Claude 3.5 Sonnet at the time).
 - The early themes were improving analytical capability and autonomous execution. Later iterations also targeted preventing duplicate module/resource generation, unintended design changes by the AI, and infinite loops in error handling. These efforts, combined with model refreshes and performance gains, have produced reasonable results.
-- The focus of this version upgrade is GPT-5 optimization:
-    1. GPT-5 sometimes omits explanations until a task is complete, so this version ensures planning before starting and short explanations before tool calls.
+- The focus of this version upgrade is GPT-5.1 optimization:
     1. We create a checklist-style execution plan first, then verify completion item-by-item for a more disciplined process.
     1. Tasks are classified into Lightweight, Standard, and Critical levels, with simplified reporting for lightweight tasks and more thorough processes for heavier ones.
     1. Independent tasks are executed in parallel to improve throughput.
