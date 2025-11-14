@@ -28,9 +28,9 @@ This file records the update history of the cursorrules v5 project.
 
 #### 4. Improved progress tracking
 
-- Checklist-style execution plan
-- Visual progress indicators (✅⏳⬜)
-- 30-minute periodic progress checks
+- Checklist-style execution plan for standard and critical tasks
+- Visual progress indicators (✅⏳⬜) for long-running work
+- Simplified reporting rules for lightweight tasks with concise 1–2 sentence summaries instead of fixed-interval updates
 
 #### 5. Strengthened quality management
 
@@ -49,6 +49,12 @@ This file records the update history of the cursorrules v5 project.
 - Removed detailed examples of technology stacks
 - Removed directory structure examples
 - Focused the document on the update history
+
+#### 8. Slash command conventions
+
+- Added explicit rules for treating `/`-prefixed inputs as executable commands
+- Clarified that the assistant should not modify command files
+- Ensured only explicitly provided arguments are passed to slash commands, leaving other parameters to command defaults
 
 ## Version 2 (2024-03-02)
 

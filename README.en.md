@@ -17,11 +17,12 @@ This repository manages custom instructions for Cursor.
 - The focus of this version upgrade is GPT-5 optimization:
     1. GPT-5 sometimes omits explanations until a task is complete, so this version ensures planning before starting and short explanations before tool calls.
     1. We create a checklist-style execution plan first, then verify completion item-by-item for a more disciplined process.
-    1. For light tasks, the process is simplified to avoid overhead; for heavier tasks, a more thorough process is used.
+    1. Tasks are classified into Lightweight, Standard, and Critical levels, with simplified reporting for lightweight tasks and more thorough processes for heavier ones.
     1. Independent tasks are executed in parallel to improve throughput.
+- In addition, this version defines explicit slash command conventions (treating `/`-prefixed input as commands, not modifying command files, and passing only explicitly provided arguments) so that Cursor Agent can safely execute local commands.
 - `v5` was initially created with Anthropic Prompt Generator and has since gone through cycles of evaluation by contemporary models and practical improvements. When customizing, we recommend having your chosen AI evaluate it as well.
 
-- For detailed updates, see [CHANGELOG.en.md](CHANGELOG.en.md).
+- For detailed updates, including task classification, error handling tiers, and slash command conventions, see [CHANGELOG.en.md](CHANGELOG.en.md).
 
 ## Usage
 

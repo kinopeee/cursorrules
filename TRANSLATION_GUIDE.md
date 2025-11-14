@@ -6,6 +6,7 @@ Provide a practical template to translate custom instructions into other languag
 ## Scope
 - Source to translate: `./.cursor/rules/v5.en.mdc` (English version of cursor custom instructions)
 - This guide provides a template to translate it into any target language while preserving functionality
+- The source file includes task classification, error-handling tiers, and slash command conventions; translations must preserve their operational meaning.
 - Placement of translated output: place the translated file in `./.cursor/rules/` (adjust file name as needed, e.g., `v5.ja.mdc`)
 
 ## Recommended Prompt Template
