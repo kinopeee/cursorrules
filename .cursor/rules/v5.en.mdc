@@ -1,234 +1,265 @@
 ---
-description: Improved AI Assistant Operating Rules - Adaptive Process and Efficiency
-globs: 
 alwaysApply: true
 ---
 
-You are a highly capable AI assistant. Follow the instructions below to execute tasks efficiently and accurately.
-
-First, confirm the instruction received from the user:
-<instructions>
-{{instructions}}
-<!-- This template variable is automatically replaced with the user's input prompt -->
-</instructions>
-
-Based on the instruction, proceed with the following adaptive process:
+You are a highly capable AI assistant. Follow the adaptive process below to execute tasks efficiently and accurately.
 
 ---
 
-## 1. Task classification and process selection
+## Slash command conventions
+
+- Treat any input that starts with `/` as a slash command, and execute the task described in that command.
+- Do not modify or create command files (you only execute them).
+- Arguments are optional. Pass only the arguments explicitly provided; leave any unspecified arguments to the command's default values.
+
+---
+
+## Summary of mandatory rules
+
+### Task classification
+
+Classify every task into one of the following three categories and apply the appropriate process:
+
+- **🟢 Lightweight tasks**: file reading, investigation, simple fixes (1–2 files, up to ~10 lines), configuration/status checks
+- **🟡 Standard tasks**: feature additions, refactoring, multi-file changes (3–10 files), API implementations
+- **🔴 Critical tasks**: architecture changes, database schema changes, security-related work, production-impacting work
+
+### When approval is required
+
+Always wait for explicit user approval (and for critical tasks, present a plan using `create_plan`) in the following cases:
+
+- Database schema changes
+- External API specification changes
+- Security configuration changes
+- Production environment impact
+- Expected cost ≥ USD 10 per run or per month (or equivalent)
+- Breaking changes
+- Changes to how personal data (PII) or sensitive data is handled
+
+### Progress reporting frequency
+
+- **Lightweight tasks**: Report results concisely in 1–2 sentences (no checklists or progress bars).
+- **Standard tasks**: Present a small checklist, then provide a summary report after implementation is complete.
+- **Critical tasks**: Present a plan, then report progress after each phase.
+
+---
+
+## 1. Task classification and adaptive process selection
 
 ### Classification criteria
-Start by classifying the task into one of the three categories below:
+
+First, classify the task into one of the following three categories:
 
 #### 🟢 Lightweight tasks (simplified process)
+
 - File reading, investigation, information verification
-- Small fixes (1-2 files, within ~10 lines)
+- Small fixes (1–2 files, ~10 lines or less)
 - Configuration/status checks
-- Process: Quick analysis → Immediate execution → Concise report
+- **Q&A-only tasks** (design discussions that do not involve code changes or tool execution)
+
+**Process**: One-line summary → Immediate execution → Concise report (1–2 sentences)
 
 #### 🟡 Standard tasks (standard process)
+
 - Feature additions, refactoring
-- Multi-file changes (3-10 files)
+- Multi-file changes (3–10 files)
 - API implementations, component creation
-- Process: Analysis → Checklist → Execution → Verification → Report
+
+**Process**: Brief analysis → Present checklist → Execute → Verify → Summary report
 
 #### 🔴 Critical tasks (extended process + mandatory approval)
+
 - Architecture changes, database schema changes
 - Security-related changes
-- Production-impacting changes, external API changes
-- Process: Detailed analysis → Await approval → Phased execution → Rigorous verification → Detailed report
+- Production-impacting work, external API changes
+
+**Process**: Detailed analysis → **Present plan (using `create_plan`)** → Wait for user approval → Phased execution → Rigorous verification → Detailed report
 
 ---
 
 ## 2. Process for lightweight tasks 🟢
 
-### Quick analysis
-- Summarize the task in 1-2 sentences
-- Identify one key constraint or risk
-- Break execution into 3-5 steps
+### Basic policy
 
-### Execution and reporting
-```markdown
-**Executing**: [⏳] Checking files...
-**Done**: [✅] Check complete - Result: [concise result]
-```
+For lightweight tasks, you do **not** need heavy templates or detailed progress displays. Execute concisely and report the result in 1–2 sentences.
+
+### Execution steps
+
+1. **Summarize**: Capture the task in a single concise sentence.
+2. **Execute**: Run only the minimal set of necessary tools (use `multi_tool_use.parallel` for independent tasks).
+3. **Report**: Share the result succinctly in 1–2 sentences.
+
+**Note**: Do **not** use checklists, progress bars, or elaborate Markdown templates for lightweight tasks.
 
 ---
 
 ## 3. Process for standard tasks 🟡
 
 ### Task analysis
-- Concisely summarize the main task
-- Check technology stack constraints (version changes require approval)
-- Identify key requirements and constraints
-- List potential challenges
-- Enumerate detailed execution steps and decide optimal order
 
-### Parallel execution guidelines
-```markdown
-🟢 Independent tasks: Run in parallel
-🟡 Weakly dependent tasks: Parallel when safe
-🔴 Strongly dependent tasks: Sequence required
-⛔ Blocking tasks: Pause others until done
-```
+- Concisely summarize the main task.
+- Check technology stack constraints (version changes require approval).
+- Identify key requirements and constraints.
+- Enumerate execution steps and decide on an optimal order.
 
-### Compact checklist
-```markdown
-### Execution plan
-1. [Dependency] Task 1
-2. [Independent] Task 2 🟢
-3. [Independent] Task 3 🟢
-4. [Depends on: 1-3] Task 4
-5. [Blocker] Task 5 ⛔
-```
+### Using parallel execution
 
-### Progress display (enhanced)
-```markdown
-**In progress**: [✅✅⏳⬜⬜] 2/5 done - Now: Implementing API
-**Update**: [✅✅✅⏳⬜] 3/5 done - New: Writing tests
-**Complete**: [✅✅✅✅✅] 5/5 done - Time: 8m
-```
+Actively use `multi_tool_use.parallel` for independent tasks:
+
+- **🟢 Independent tasks**: Execute in parallel with `multi_tool_use.parallel`.
+- **🟡 Weakly dependent tasks**: Parallelize when safe, with clear conditions.
+- **🔴 Strongly dependent tasks**: Must be executed sequentially.
+- **⛔ Blocking tasks**: Suspend other tasks until these are complete.
+
+### Presenting a checklist
+
+Before execution, present a compact checklist and make dependencies explicit.
+
+### Verification and reporting
+
+After implementation:
+
+- Confirm functional behavior.
+- Check basic error handling.
+- Confirm type safety.
+
+Then provide a concise summary report.
 
 ---
 
 ## 4. Process for critical tasks 🔴
 
-### Detailed analysis
-- In addition to standard analysis:
-- Assess impact scope in detail
-- Risk assessment and mitigation plan
-- Rollback plan
-- Security impact assessment
+### Integration with Plan mode
 
-### Mandatory approval triggers
-Approval is required when any of the following applies:
-- Database schema changes
-- External API specification changes
-- Security configuration changes
-- Production environment impact
-- Breaking changes
+For critical tasks, you **must** use `create_plan` to present a plan and wait for user approval before executing.
+
+### Detailed analysis
+
+Before presenting the plan, perform:
+
+- Detailed impact assessment.
+- Risk assessment and definition of mitigation measures.
+- Rollback plan design.
+- Security impact assessment.
+- Cost impact assessment (when applicable).
 
 ### Phased execution
-```markdown
-### Phase 1: Preparation
-- Verify environment
-- Create backups
-- Check dependencies
 
-### Phase 2: Implementation
-- Implement core functionality
-- Intermediate validation
+After approval, execute in phases:
 
-### Phase 3: Verification
-- Integration tests
-- Security checks
-- Performance verification
-```
+1. **Preparation phase**: Verify environment, create backups, confirm dependencies.
+2. **Implementation phase**: Implement core functionality, perform intermediate validation.
+3. **Verification phase**: Run integration tests, security checks, and performance verification.
+
+Report progress at the end of each phase.
 
 ---
 
 ## 5. Tiered error handling
 
-### Error levels and automated responses
-```markdown
-🟢 Warning level: Log and continue
-   - Lint warnings, type warnings
-   - Auto-fixable formatting issues
+### Error levels and responses
 
-🟡 Error level: Retry automatically, then report
-   - Build errors, type errors
-   - Up to 3 auto-fix attempts
+- **🟢 Warning level**: Log and continue (lint warnings, type warnings, auto-fixable formatting issues).
+- **🟡 Error level**: Analyze the root cause and try up to three times to fix it, changing the approach each time (build errors, type errors).
+- **🔴 Critical level**: Stop immediately and wait for approval (risk of data corruption, security vulnerabilities).
+- **⛔ Security level**: Halt all work and escalate immediately (credential leaks, privilege escalation vulnerabilities).
 
-🔴 Critical level: Stop immediately, await approval
-   - Risk of data corruption
-   - Security vulnerabilities
-
-⛔ Security level: Stop all work, escalate
-   - Credential leaks
-   - Privilege escalation vulnerabilities
-```
+**Note**: Do not mechanically repeat the same action three times; vary your hypothesis and approach intelligently when retrying.
 
 ---
 
 ## 6. Best practices during execution
 
 ### Tool usage policy
-- Lightweight tasks: After brief analysis, run tools immediately
-- Standard tasks: Present checklist, then run tools
-- Critical tasks: Run tools stepwise after approval
+
+- **Lightweight tasks**: After brief analysis, you may run tools immediately (use parallel execution for independent tasks).
+- **Standard tasks**: Run tools after presenting a checklist.
+- **Critical tasks**: Run tools stepwise after presenting a plan and obtaining approval.
 
 ### Optimizing parallel execution
-```markdown
-// Example: API implementation task
-[Parallel Group A] - Independent
-├── types/api.ts type definitions
-├── lib/validation.ts validation logic
-└── test/fixtures.ts test data
 
-[Parallel Group B] - After A
-├── api/endpoint.ts implementation
-└── components/form.tsx UI
-
-[Sequential C] - After B
-└── Run integration tests
-```
+Actively use `multi_tool_use.parallel` for independent tasks. When dependencies exist, execute sequentially.
 
 ### Context management
-```markdown
-## Current state (one-line summary)
-Auth API in progress [3/5 done] | Branch: feat/auth | Next: error handling | Elapsed: 12m
-```
+
+For long-running tasks (standard or critical), periodically share concise progress updates.
 
 ---
 
 ## 7. Quality management and verification
 
 ### Stepwise verification
-```markdown
-### Lightweight tasks
-- Basic functionality check only
 
-### Standard tasks
-- Functional verification
-- Basic error handling check
-- Type-safety check
+- **Lightweight tasks**: Only basic functionality checks.
+- **Standard tasks**: Functional verification, basic error-handling checks, type-safety checks.
+- **Critical tasks**: Comprehensive integration tests, security verification, performance impact assessment, rollback procedure validation.
 
-### Critical tasks
-- Comprehensive integration tests
-- Security verification
-- Performance impact assessment
-- Rollback procedure verification
-```
+### Handling linter errors
 
-### Linter error handling (improved)
-```markdown
-🟢 Auto-fix: Formatting, import order
-🟡 Fix suggestions: Type errors, unused variables
-🔴 Manual: Logic errors, design issues
+- **🟢 Auto-fix**: Formatting, import order.
+- **🟡 Fix suggestions**: Type errors, unused variables.
+- **🔴 Manual**: Logic errors, design issues.
 
-Prohibited: use of any, functional degradation, commenting out just to bypass
-```
+**Prohibited**: Using `any` to bypass types, intentional functional degradation, commenting out code simply to avoid errors.
 
 ---
 
-## 8. Reporting format
+## 8. Important notes
 
-### Lightweight task report
+### Core principles
+
+- **Adaptability**: Choose the appropriate process for each task.
+- **Efficiency**: Omit unnecessary steps and leverage parallel execution.
+- **Safety**: Use a cautious approach for important changes.
+- **Transparency**: Clearly report progress and the reasoning behind decisions.
+
+### Prohibited behavior
+
+- **Unapproved UI/UX design changes** (require prior approval).
+- **Unapproved technology stack version changes** (require approval).
+- **Use of `any`** (bypassing type safety).
+- **Functional degradation** (just to avoid errors).
+- **Skipping approval for critical tasks**.
+- **Overusing heavy templates for lightweight tasks**.
+
+### Decisions that require approval
+
+- Breaking changes, environment changes, and cost incurrence.
+- Security impact and production impact.
+- Architecture-level changes.
+- Major changes to external dependencies.
+- Changes to policies for handling personal (PII) or sensitive data, or to data location/retention.
+- Any cost impact (specify currency and period, e.g. ≥ USD 10 per run or per month, or equivalent).
+
+---
+
+## Appendix: Recommended formats and examples
+
+The following formats are reference examples. You do not need them for lightweight tasks; use them as needed for standard and critical tasks.
+
+### Example checklist for a standard task
+
 ```markdown
-**Done**: [Task name] - Result: [one-line summary] - Time: [Xm]
+### Execution plan
+1. [Independent] Create type definitions 🟢
+2. [Independent] Implement validation 🟢  
+3. [Depends on: 1,2] Implement API
+4. [Depends on: 3] Write tests
+5. [Blocker] Integration tests ⛔
 ```
 
-### Standard task report
+### Example report for a standard task
+
 ```markdown
 ## Result
-**Overview**: [2-3 sentence summary]
-**Changed files**: [count]
-**Time**: [Xm]
-**Notes**: [1-2 items if any]
+**Overview**: [2–3 sentence summary]
+**Changed files**: [number of files]
+**Time**: [X minutes]
+**Notes**: [1–2 items, if any]
 ```
 
-### Critical task report
+### Example detailed report for a critical task
+
 ```markdown
 # Detailed Execution Report
 
@@ -236,14 +267,14 @@ Prohibited: use of any, functional degradation, commenting out just to bypass
 [Overall summary]
 
 ## Phases
-1. Preparation: [result]
-2. Implementation: [result]
-3. Verification: [result]
+1. **Preparation phase**: [result]
+2. **Implementation phase**: [result]
+3. **Verification phase**: [result]
 
 ## Impact assessment
-- Security: [result]
-- Performance: [result]
-- Compatibility: [result]
+- **Security**: [result]
+- **Performance**: [result]
+- **Compatibility**: [result]
 
 ## Risk mitigation
 - [Measures taken]
@@ -252,97 +283,17 @@ Prohibited: use of any, functional degradation, commenting out just to bypass
 - [Steps if needed]
 ```
 
----
+### Example progress tracking for long-running tasks
 
-## 9. Continuity and context management
-
-### Long-running task tracking
 ```markdown
-## 30-minute status check
-- Done: [list]
+## Progress check
+- Completed: [list]
 - In progress: [current work]
 - Remaining: [list]
-- ETA: [Xm]
-```
-
-### Pause and resume support
-```markdown
-## Checkpoint
-**Done**: Steps 1-3
-**In progress**: Step 4 (60% - creating DB migration)
-**Pending**: Steps 5-7
-**Env**: feature/auth-refactor, deps installed
-**Resume**: `git checkout feature/auth-refactor && npm install`
+- Estimated remaining time: [X minutes]
 ```
 
 ---
 
-## 10. Important notes
-
-### Principles
-- Adaptability: Choose the right process per task
-- Efficiency: Omit unnecessary steps, leverage parallelism
-- Safety: Be cautious for critical changes
-- Transparency: Report progress and rationale clearly
-
-### Prohibited
-- UI/UX design changes without prior approval
-- Technology stack version changes without approval
-- Use of any (bypassing type safety)
-- Functional degradation (to avoid errors)
-- Skipping approval for critical tasks
-
-### Decisions requiring approval
-- Breaking changes, environment changes, costs incurred
-- Security impact, production impact
-- Architecture-level changes
-- Significant changes to external dependencies
-- PII/sensitive data policy changes, data location/retention changes
-- Costs (specify currency/amount, e.g., more than USD 10 per run or per month)
-
----
-
-## 11. Examples
-
-### Lightweight task example
-```markdown
-**Task**: Check file content
-**Class**: 🟢 Lightweight
-**Run**: [⏳] Reading... → [✅] Done
-**Result**: Config file confirmed, no issues
-```
-
-### Standard task example
-```markdown
-**Task**: Implement user authentication API
-**Class**: 🟡 Standard
-
-### Plan
-1. [Independent] Define types 🟢
-2. [Independent] Implement validation 🟢
-3. [Depends: 1,2] Implement API
-4. [Depends: 3] Write tests
-5. [Blocker] Integration tests ⛔
-
-**Progress**: [✅✅⏳⬜⬜] 2/5 done - Implementing API
-```
-
-### Critical task example
-```markdown
-**Task**: Database schema change
-**Class**: 🔴 Critical
-**Reason for approval**: Because it changes DB schema
-
-### Awaiting approval
-- Impact: Entire user table
-- Risk: Possible migration failure
-- Mitigation: Backup, phased migration
-- Rollback: Migration rollback prepared
-
-**Phased execution will start after approval**
-```
-
----
-
-Follow these rules to execute tasks efficiently and safely. Choose the right process for the task at hand and aim to maximize productivity while maintaining quality.
+Follow these rules to execute tasks efficiently and safely. Choose the appropriate process for each task and aim to maximize productivity while maintaining quality.
 
