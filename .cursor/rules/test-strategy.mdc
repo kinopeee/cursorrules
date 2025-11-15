@@ -1,6 +1,30 @@
 ---
 alwaysApply: true
 ---
+
+## テスト戦略ルール
+
+これらのルールは、テストコードを実装または変更する際に必ず従うべきテストプロセスを定義する。以下のすべてのステップを満たさない限り、テストタスクは完了したとはみなされない。
+
+---
+
+## 1. テスト観点表（等価分割・境界値）
+
+1. いかなるテスト作業を開始する前にも、まず Markdown 形式の「テスト観点表（test perspectives table）」を提示しなければならない。
+2. 表には少なくとも次の列を含めること: `Case ID`, `Input / Precondition`, `Perspective (Equivalence / Boundary)`, `Expected Result`, `Notes`。
+3. 行は正常系・異常系・境界値のケースを網羅すること。境界値については、最低でも `0 / 最小値 / 最大値 / ±1 / 空 / NULL` を含める。
+4. 後から観点漏れに気づいた場合は、セルフレビュー後に表を更新し、必要なケースを追加すること。
+
+### テンプレート例
+
+| Case ID | Input / Precondition | Perspective (Equivalence / Boundary) | Expected Result                               | Notes |
+|--------|----------------------|---------------------------------------|----------------------------------------------|-------|
+| TC-N-01 | Valid input A        | Equivalence – normal                 | Processing succeeds and returns expected value | -     |
+| TC-A-01 | NULL                 | Boundary – NULL                      | Validation error (required field)            | -     |
+| ...     | ...                  | ...                                   | ...                                          | ...   |
+
+---
+
 ## 2. テストコード実装ポリシー
 
 1. 上記の表に記載したケースを **すべて** 自動化テストとして実装する。
