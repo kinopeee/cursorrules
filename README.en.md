@@ -26,9 +26,10 @@ This repository manages custom instructions for Cursor.
 ## Usage
 
 1. If `.cursor/rules` does not exist yet, create the folder.
-2. If the path exists, save `v5.en.mdc` there.
-- Because its application condition is "always", it will be referenced in subsequent chats as long as it exists at the designated path.
-- An English version `v5.en.mdc` is also provided. Both Japanese and English versions are set to `alwaysApply: true`, so you may want to adjust this setting based on your preferred language.
+2. If the path exists, save `v5.mdc` (Japanese) and/or `v5.en.mdc` (English) there.
+3. If you also want to enforce the test strategy rules, save `test-strategy.mdc` (Japanese) and/or `test-strategy.en.mdc` (English) under the same `.cursor/rules` folder.
+- Because their application condition is "always", they will be referenced in subsequent chats as long as they exist at the designated path.
+- Both Japanese and English versions are set to `alwaysApply: true`, so you may want to adjust this setting based on your preferred language and whether you want the test rules enabled by default.
 
 ## Translation Guide
 
