@@ -4,6 +4,44 @@ English | [日本語](CHANGELOG.md)
 
 This file records the update history of the cursorrules v5 project.
 
+## Version 4.1 (2025-11-15)
+
+### Highlights
+
+#### 1. Added test strategy rules
+
+- Added new test strategy rules (test-strategy.mdc/en.mdc)
+- Mandated test perspective tables (equivalence partitioning and boundary value analysis)
+- Standardized Given/When/Then comment format
+- Clear verification requirements for exceptions, error messages, and error codes
+- Explicit execution commands and coverage reporting
+- Added mock usage guidelines and operational notes in both Japanese and English
+
+#### 2. Major refactoring of v5 coding support rules
+
+- Reduced verbosity and improved conciseness (509 lines removed, 425 lines added)
+- Clarified task classification (🟢 Lightweight/🟡 Standard/🔴 Critical) and reasoning depth
+- Reorganized tool usage policy (read_file/apply_patch/grep/parallel execution, etc.)
+- Restructured standard flows (lightweight/standard/critical tasks) and output style
+- Unified error, type, and security policies with a code-centric focus
+
+#### 3. Unified model-neutral language
+
+- Removed references to specific model names (GPT-5.1)
+- Unified to adaptive reasoning expressions as generic AI assistant rules
+- Improved future maintainability and generality
+
+#### 4. Removed specific tool references
+
+- Removed descriptions of Terraform/Pulumi/Snyk/AWS MCP tools
+- Eliminated references to specific tools for better generality
+- Unified under static analysis tools section
+
+#### 5. Documentation updates
+
+- Added references to test strategy rules in README (English and Japanese)
+- Documented language-specific rule file saving procedures and test policy application
+
 ## Version 4 (2025-11-15)
 
 ### Highlights
