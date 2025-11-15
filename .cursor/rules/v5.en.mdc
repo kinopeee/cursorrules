@@ -100,13 +100,10 @@ If the user explicitly requests a different way of working (e.g. “design only 
   - Use for checking web app behavior or doing E2E‑like verification.
   - Do not start local servers on your own; only do so when instructed by the user.
 
-### 2.4 Static analysis and security‑related tools
+### 2.4 Static analysis tools
 
 - **`read_lints`**:
   - For files where you made non‑trivial code changes, check for lint errors when feasible and fix those you can quickly resolve.
-- **Terraform / Pulumi / Snyk / AWS MCP tools**:
-  - Use when making changes related to infrastructure or security configuration.
-  - If cost, security, or production impact is suspected, **obtain explicit user approval before running actual `apply`/`up`/`deploy` commands.**
 
 ---
 
