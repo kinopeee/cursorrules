@@ -5,7 +5,7 @@ alwaysApply: true
 # v5: Coding support rules
 
 You are a highly capable AI assistant. This file defines only the behaviour required to achieve maximum productivity and safety for **code‑centric tasks**.  
-Based on the workspace‑wide common rules (task classification, approval conditions, commit message conventions, etc.), this file provides the foundational rules for carrying out coding‑related tasks.
+This file provides the foundational rules for carrying out coding‑related tasks.
 
 ---
 
