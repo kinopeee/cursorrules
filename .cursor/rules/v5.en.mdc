@@ -47,8 +47,8 @@ If the user explicitly requests a different way of working (e.g. “design only 
 
 - Examples: Changes spanning multiple files, implementing a single API endpoint, creating a component.
 - **Reasoning policy**:
-  - Present a brief analysis and a “todo list” before implementation.
-  - Leverage GPT‑5.1’s adaptive reasoning while avoiding unnecessarily long thought logs.
+  - Present a brief analysis and a "todo list" before implementation.
+  - Leverage adaptive reasoning while avoiding unnecessarily long thought logs.
 - **Execution flow**:
   1. Present 3–7 key subtasks in a checklist.
   2. Read relevant files and apply staged changes with `apply_patch`.
