@@ -143,7 +143,7 @@ Recommendation: {recommended action for the user (optional)}
 Users can choose from the following three modes:
 
 - **Strict mode**: All detection features enabled; alerts of all levels are shown.
-- **Standard mode**: Default mode; alerts of INFO level and higher are shown.
+- **Standard mode**: Default mode; alerts of WARN level and higher are shown.
 - **Development mode**: Only CRITICAL alerts are shown; external source verification remains enabled.
 
 ### 2-2. Customizable settings
