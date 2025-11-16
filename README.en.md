@@ -50,6 +50,16 @@ For the division of responsibilities and usage patterns between rule files (`.cu
   - **Role**: Defines test strategy rules for test implementation and maintenance, including equivalence partitioning, boundary value analysis, and coverage requirements.
   - **Purpose**: Serves as a quality guardrail by requiring corresponding automated tests whenever meaningful changes are made to production code, where reasonably feasible.
 
+- `.cursor/rules/prompt-injection-guard.mdc`  
+  - **Role**: Defines defense rules against **context injection attacks from external sources (RAG, web, files, API responses, etc.)**.
+  - **Contents**: Describes guardrails such as restrictions on executing commands originating from external data, the Instruction Quarantine mechanism, the `SECURITY_ALERT` format, and detection of user impersonation attempts.
+  - **Characteristics**: Does not restrict the user's own direct instructions; only malicious commands injected via external sources are neutralized.
+
+- `doc/custom_instruction_plan_prompt_injection.md`  
+  - **Role**: Design and threat analysis document for external context injection defense.
+  - **Contents**: Organizes attack categories (A-01–A-09) via external sources, corresponding defense requirements (R-01–R-08), design principles for the external data control layer, and validation/operations planning.
+  - **Update**: Fully revised in November 2024 to focus on external-source attacks.
+
 
 ## Translation Guide
 
