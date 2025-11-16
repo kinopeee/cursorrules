@@ -47,3 +47,5 @@ Released under the MIT License. See [LICENSE](LICENSE) for details.
 
 - There is no official support for this repository, but feedback is welcome. I also share Cursor-related information on X (Twitter).
 [Follow on X (Twitter)](https://x.com/kinopee_ai)
+
+<!-- Verification comment -->
