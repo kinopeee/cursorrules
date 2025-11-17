@@ -20,8 +20,9 @@ This repository manages custom instructions for Cursor.
     1. Independent tasks are executed in parallel to improve throughput.
 - In addition, this version codifies detailed tooling policies (e.g., always read files before editing, rely on `apply_patch` for modifications, and run terminal commands only when necessary with safe flags) so the Cursor Agent executes tasks with consistent safeguards.
 - `v5` was initially created with Anthropic Prompt Generator and has since gone through cycles of evaluation by contemporary models and practical improvements. When customizing, we recommend having your chosen AI evaluate it as well.
-
 - For detailed updates, including task classification, error handling tiers, and tooling policies, see [CHANGELOG.en.md](CHANGELOG.en.md).
+
+- This repository itself also serves as a best-practice example, providing rule files for commit/PR messages and workflow command templates for commit, push, and PR creation.
 
 ## Usage
 
