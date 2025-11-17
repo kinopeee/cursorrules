@@ -7,6 +7,12 @@ description: Gitコミットメッセージの書式ルール（Prefix + サマ�
 
 このルールは、すべてのコミットに対して適用されるコミットメッセージのガイドラインです。
 
+## このルールの位置づけ
+
+- 本ルールは、Conventional Commits をベースにしたコミットメッセージ規約です。
+- `Prefix` や `BREAKING CHANGE` などの基本フォーマットは Conventional Commits に準拠しつつ、`language` による言語指定や箇条書き本文など、このリポジトリ向けのガイドラインを追加しています。
+- 他プロジェクトで再利用する場合は、`language` や Prefix の一覧を各プロジェクトのポリシーに合わせて調整してください。
+
 ## 言語指定
 
 - このルールファイルでは、コミットメッセージに用いる言語を表す論理名として `language` を用いる。
@@ -43,6 +49,7 @@ Prefix は、Conventional Commits における `type` に相当し、小文字�
 - revert: 取り消し
 
 Conventional Commits と同様に、必要に応じて `<Prefix>(scope):` の形式も許可します（例: `fix(translation): ...`）。
+- 詳細な仕様については、[Conventional Commits](https://www.conventionalcommits.org/) の公式ドキュメントも参照してください。
 
 ## サマリ（1行目）
 
@@ -55,6 +62,7 @@ Conventional Commits と同様に、必要に応じて `<Prefix>(scope):` の形
 - コミットメッセージは、必ず未コミットの差分（`git diff` / `git diff --cached` など）を確認したうえで、その内容からサマリと本文を生成する。
 - issue タイトルやブランチ名だけから推測して書かず、実際の差分に含まれる変更内容を要約・列挙する。
 - AI やスクリプトによる自動生成の場合も、同様に未コミットの差分を入力として用いる。
+- bot や自動化ツールがコミットする場合も、このルールに従い、必ず差分に基づいてメッセージを生成する。
 
 ## 本文（箇条書き）
 
