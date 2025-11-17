@@ -1,0 +1,83 @@
+---
+alwaysApply: true
+description: PR message format rules (Prefix + summary + structured body)
+---
+
+# PR Message Format Rules
+
+This rule defines guidelines for Pull Request (PR) titles and bodies.
+
+## Role of this rule
+
+- This rule defines the PR message format in a way that is consistent with the commit message convention (`commit-message-format.mdc`) based on Conventional Commits.
+- The `Prefix` and summary style are aligned with commit messages, while the PR body is required to be structured into sections such as "Overview", "Changes", and "Tests".
+- When reusing this rule in other projects, adjust `language` and required sections (e.g. “Technical details”) according to your project’s policy.
+
+## Language
+
+- In this file, `language` is a logical name representing the language used in PR messages.
+- `language = "en"`
+- The title and body should, in principle, be written in the language specified by `language`.
+
+## Title (first line)
+
+### Format (required)
+
+```
+<Prefix>: <summary (imperative / concise)>
+```
+
+- `Prefix` is recommended to use the same `type` as in Conventional Commits (e.g. `feat`, `fix`, `refactor`, `docs`, `chore`).
+- Write concisely in the language specified by `language` and avoid a trailing period.
+- Briefly express what was changed and, if needed, why, aiming for about 50 characters.
+
+## Body (structured format)
+
+### Recommended template
+
+PR bodies should use a structured format like the following:
+
+```markdown
+## Overview
+
+Short summary of what this PR implements or fixes.
+
+## Changes
+
+- Describe change 1
+- Describe change 2
+- Describe change 3
+
+## Technical details (optional)
+
+- Describe implementation details or design intent, if needed
+
+## Tests
+
+- Types of tests run (unit tests, E2E tests, manual verification, etc.)
+- Key verification results
+
+## Related issues
+
+- Closes #123
+- Refs #456
+```
+
+- "Overview" and "Changes" are considered required sections.
+- "Technical details", "Tests", and "Related issues" may be required depending on your project’s rules.
+- Each bullet point should clearly describe what was changed, where, and why.
+
+## Message generation principles
+
+- PR titles and bodies must always be based on the **actual diff and commit history** (e.g. by using `git diff`, `git log`).
+- Do not rely solely on issue titles or branch names; explicitly describe the changes, impact, and tests in the body.
+- When AI or scripts generate PR messages, they should use diffs, commit history, and related issue information as input.
+- Choose Prefix and summaries in a way that is consistent with the commit message rules (`commit-message-format.mdc`) to avoid semantic mismatch between commits and PRs.
+
+## Prohibited patterns
+
+- Writing titles or bodies only in a different language than specified by `language`.
+- Vague titles that do not convey meaning (e.g. "update", "fix issue", "changes").
+- Unstructured walls of text without headings or bullet lists, making it hard to understand the content.
+- Descriptions that contradict the actual diff, or that intentionally omit important changes, impact, or test results.
+

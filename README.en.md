@@ -18,18 +18,38 @@ This repository manages custom instructions for Cursor.
     1. We create a checklist-style execution plan first, then verify completion item-by-item for a more disciplined process.
     1. Tasks are classified into Lightweight, Standard, and Critical levels, with simplified reporting for lightweight tasks and more thorough processes for heavier ones.
     1. Independent tasks are executed in parallel to improve throughput.
-- In addition, this version defines explicit slash command conventions (treating `/`-prefixed input as commands, not modifying command files, and passing only explicitly provided arguments) so that Cursor Agent can safely execute local commands.
+- In addition, this version codifies detailed tooling policies (e.g., always read files before editing, rely on `apply_patch` for modifications, and run terminal commands only when necessary with safe flags) so the Cursor Agent executes tasks with consistent safeguards.
 - `v5` was initially created with Anthropic Prompt Generator and has since gone through cycles of evaluation by contemporary models and practical improvements. When customizing, we recommend having your chosen AI evaluate it as well.
+- For detailed updates, including task classification, error handling tiers, and tooling policies, see [CHANGELOG.en.md](CHANGELOG.en.md).
 
-- For detailed updates, including task classification, error handling tiers, and slash command conventions, see [CHANGELOG.en.md](CHANGELOG.en.md).
+- This repository itself also serves as a best-practice example, providing rule files for commit/PR messages and workflow command templates for commit, push, and PR creation.
 
 ## Usage
 
 1. If `.cursor/rules` does not exist yet, create the folder.
 2. If the path exists, save `v5.en.mdc` (English) or `v5.mdc` (Japanese) there.
 3. If you also want to enforce the test strategy rules, save `test-strategy.mdc` (Japanese) and/or `test-strategy.en.mdc` (English) under the same `.cursor/rules` folder.
+4. To enable the commit message format rules, save `commit-message-format.mdc` (Japanese) and/or `commit-message-format.en.mdc` (English) under the same `.cursor/rules` folder.
+5. To enable the PR message format rules, save `pr-message-format.mdc` (Japanese) and/or `pr-message-format.en.mdc` (English) under the same `.cursor/rules` folder.
 - Because their application condition is "always", they will be referenced in subsequent chats as long as they exist at the designated path.
 - Both Japanese and English versions are set to `alwaysApply: true`, so you may want to adjust this setting based on your preferred language and whether you want the test rules enabled by default.
+
+For the division of responsibilities and usage patterns between rule files (`.cursor/rules/*.mdc`) and workflow commands (`.cursor/commands/*.md`), see [doc/rules-and-workflows.en.md](doc/rules-and-workflows.en.md).
+
+### Guardrail-related files
+
+- `commit-message-format.mdc` / `commit-message-format.en.mdc`  
+  - **Role**: Defines the commit message format (prefix, summary, bullet-list body) and prohibited patterns.
+  - **Characteristics**: Based on Conventional Commits, with additional guidelines such as `language`-based language selection and diff-based message generation tailored for this repository.
+
+- `pr-message-format.mdc` / `pr-message-format.en.mdc`  
+  - **Role**: Defines the format for PR titles and bodies (prefix-style titles and structured sections such as Overview, Changes, Tests) and prohibited patterns.
+  - **Characteristics**: Aligns PR messages with the commit message conventions and encourages structured descriptions that facilitate review and understanding of change intent.
+
+- `test-strategy.mdc` / `test-strategy.en.mdc`  
+  - **Role**: Defines test strategy rules for test implementation and maintenance, including equivalence partitioning, boundary value analysis, and coverage requirements.
+  - **Purpose**: Serves as a quality guardrail by requiring corresponding automated tests whenever meaningful changes are made to production code, where reasonably feasible.
+
 
 ## Translation Guide
 
