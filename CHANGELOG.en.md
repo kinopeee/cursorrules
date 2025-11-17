@@ -15,7 +15,7 @@ This file records the update history of the cursorrules v5 project.
 #### 2. Separated rules and workflows and added documentation
 
 - Separated rule definitions and workflow (custom command) definitions and organized them
-- Added documentation explaining best practices for rules and workflows (rules-and-workflows.md)
+- Added documentation explaining best practices for rules and workflows (rules-and-workflows.en.md)
 
 ## Version 4.1 (2025-11-15)
 
