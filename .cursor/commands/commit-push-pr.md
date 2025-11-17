@@ -78,6 +78,8 @@ PR_BODY=$(cat <<'EOF'
 Refs #123
 EOF
 )
+# 注意: <<'EOF' (引用符あり) はヒアドキュメント内の変数展開を無効にします。
+# PR本文に変数を含めたい場合は、<<EOF (引用符なし) を使用してください。
 
 # 一括実行
 BRANCH=$(git branch --show-current) && \
@@ -153,6 +155,8 @@ git diff --stat $(git merge-base origin/main HEAD)...HEAD
 # コミット履歴
 git log origin/main..HEAD --oneline
 ```
+
+> **ブランチ参照に関する注意:** 上記のコマンドでは `origin/main`（リモートブランチ）を使用して、最新のリモート状態と比較しています。`gh pr create --base main` で PR を作成する際の `main` 引数は、リモートリポジトリ上のターゲットブランチ名を指します。どちらのアプローチもそれぞれの文脈で正しい使い方です。
 
 ## PRタイトルとメッセージのルール
 

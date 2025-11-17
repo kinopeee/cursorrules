@@ -81,6 +81,8 @@ This PR removes unnecessary debug log output and reduces log volume.
 Refs #123
 EOF
 )
+# Note: <<'EOF' (with quotes) prevents variable expansion in the here-document.
+# If you need to include variables in your PR body, use <<EOF (without quotes) instead.
 
 # One-shot execution
 BRANCH=$(git branch --show-current) && \
@@ -156,6 +158,8 @@ git diff --stat $(git merge-base origin/main HEAD)...HEAD
 # Commit history
 git log origin/main..HEAD --oneline
 ```
+
+> **Note on branch references:** The commands above use `origin/main` (remote branch) to ensure comparison against the latest remote state. When creating PRs with `gh pr create --base main`, the `main` argument refers to the target branch name on the remote repository. Both approaches are correct in their respective contexts.
 
 ## PR title and message rules
 
