@@ -2,81 +2,77 @@
 
 ## 概要
 
-現在のブランチに対して変更をコミットし、リモートへプッシュ後、Pull Requestを作成します。main/masterへの直接プッシュは禁止ポリシーのため、ブランチチェックを含みます。`package.json` が存在する場合のみ、コミット前にローカル品質チェック（lint、type-check、build）を実行します。
+現在のブランチに対して変更をコミットし、リモートへプッシュしたあと、Pull Request を作成するための一括実行コマンドの例です。  
+main/master への直接プッシュ禁止や、コミット前に実行する品質チェック（lint / test / build など）、PR 作成フロー（AI/MCP を使うか、CLI を使うかなど）は、各プロジェクトのポリシーに応じてこのテンプレートを調整してください。
 
 ## 前提条件
 
 - 変更済みファイルが存在すること
 - リモート `origin` が設定済みであること
-- `package.json` が存在する場合のみ、Node 環境で `npm` コマンドが利用可能であること
 - GitHub CLI (`gh`) がインストール済みであること（フォールバック用）
 - 作業ブランチ（feature/_, fix/_ など）にいること
 
 ## 実行手順（対話なし）
 
 1. ブランチ確認（main/master 直プッシュ防止）
-2. `package.json` の存在確認
-3. 存在する場合のみ品質チェック（lint:fix → type-check → build）
-4. 変更のステージング（`git add -A`）
-5. コミット（引数または環境変数のメッセージ使用）
-6. プッシュ（`git push -u origin <current-branch>`）
-7. PR作成（MCP優先、失敗時はCLI）
+2. 必要に応じて品質チェック（lint / test / build など）を実行
+3. 変更のステージング（`git add -A`）
+4. コミット（引数または環境変数のメッセージ使用）
+5. プッシュ（`git push -u origin <current-branch>`）
+6. PR作成（MCP や CLI など、環境に応じた方法で作成）
 
 ## 使い方
 
 ### A) 最小限の情報で実行（推奨）
 
-AIがブランチ名と差分から自動でPRタイトルとメッセージを生成します。
+コミットメッセージだけ指定し、PR タイトルと本文は AI（MCP 経由など）に任せるパターンです。
 
 ```bash
-# コミットメッセージのみ指定
-MSG="fix: CSRF検証をテスト環境でスキップ"
+# コミットメッセージのみ指定（例）
+MSG="fix: 不要なデバッグログ出力を削除"
 
 # 一括実行
 BRANCH=$(git branch --show-current) && \
 if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then \
   echo "⚠️ main/master への直接プッシュは禁止です"; exit 1; \
-fi && \
-if [ -f package.json ]; then \
-  npm run lint:fix && npm run type-check && npm run build; \
-else \
-  echo "ℹ️ package.json が見つかりません。品質チェックをスキップします。"; \
-fi && \
+fi
+
+# 任意の品質チェック（必要な場合のみ）
+# 例:
+# ./scripts/lint.sh && ./scripts/test.sh && ./scripts/build.sh || exit 1
+
 git add -A && \
 git commit -m "$MSG" && \
 git push -u origin "$BRANCH"
 
-# ここでAIがPR作成を実行
+# ここでAIがPR作成を実行（例）
 # - ブランチ名から目的を推測
 # - git diff --name-status で変更ファイルを確認
 # - PRタイトルとメッセージを自動生成
-# - mcp_github_create_pull_request でPR作成
+# - mcp_github_create_pull_request / gh pr create 等で PR 作成
 ```
 
 > 注意: MCP（Model Context Protocol）はエージェントからGitHub等の外部サービスを安全に操作するための標準プロトコルです。本手順ではPR作成にMCPのGitHub連携を使用します。利用にはMCP対応環境の設定が必要です。参考: https://modelcontextprotocol.io/
 
-### B) 手動でPRタイトル・メッセージを指定
+### B) 手動で PR タイトル・メッセージを指定
 
 ```bash
 # 変数設定
-MSG="fix: CSRF検証をテスト環境でスキップ"
-PR_TITLE="fix: テスト環境でCSRF検証をスキップする機能を追加"
+MSG="fix: 不要なデバッグログ出力を削除"
+PR_TITLE="fix: 不要なデバッグログ出力を削除"
 PR_BODY=$(cat <<'EOF'
 ## 概要
-テスト環境でCSRF検証を自動的にスキップする機能を実装しました。
+このPRでは、不要なデバッグログを削除し、ログ出力量を抑制します。
 
 ## 変更内容
-- lib/api-client.ts に CSRF スキップロジックを追加
-- 環境変数 NODE_ENV が test の場合は検証をスキップ
-- 既存の本番環境での動作には影響なし
+- 冗長なデバッグログ出力を削除
+- 必要なログレベルとメッセージのみを残す
 
 ## 技術的な詳細
-- shouldSkipCSRF() 関数を追加
-- テスト実行時のパフォーマンス向上
+- 影響範囲はログ出力のみであり、ビジネスロジックには変更なし
 
 ## テスト内容
-- ユニットテストで動作確認済み
-- 本番環境での影響なしを確認
+- ログ出力の有無と動作を手動確認
 
 ## 関連Issue
 Refs #123
@@ -87,12 +83,11 @@ EOF
 BRANCH=$(git branch --show-current) && \
 if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then \
   echo "⚠️ main/master への直接プッシュは禁止です"; exit 1; \
-fi && \
-if [ -f package.json ]; then \
-  npm run lint:fix && npm run type-check && npm run build; \
-else \
-  echo "ℹ️ package.json が見つかりません。品質チェックをスキップします。"; \
-fi && \
+fi
+
+# 任意の品質チェック（必要な場合のみ）
+# ./scripts/quality-check.sh || exit 1
+
 git add -A && \
 git commit -m "$MSG" && \
 git push -u origin "$BRANCH" && \
@@ -113,20 +108,17 @@ fi
 echo "変更されたファイル:"
 git status --short
 
-# 3) ローカル品質チェック（package.json が存在する場合のみ）
-if [ -f package.json ]; then
-  echo "品質チェック実行中..."
-  npm run lint:fix && npm run type-check && npm run build || exit 1
-else
-  echo "ℹ️ package.json が見つかりません。品質チェックをスキップします。"
-fi
+# 3) 任意のローカル品質チェック（必要に応じて追加）
+# 例:
+# echo "品質チェック実行中..."
+# ./scripts/lint.sh && ./scripts/test.sh && ./scripts/build.sh || exit 1
 
 # 4) 変更をステージング
 git add -A
 echo "ステージング完了"
 
 # 5) コミット
-MSG="fix: CSRF検証をテスト環境でスキップ"
+MSG="fix: 不要なデバッグログ出力を削除"
 git commit -m "$MSG"
 echo "コミット完了"
 
@@ -134,8 +126,8 @@ echo "コミット完了"
 git push -u origin "$BRANCH"
 echo "プッシュ完了"
 
-# 7) PR作成（AIに依頼）
-# この後、AIが以下の情報を使ってPRを作成：
+# 7) PR作成（AIやCLIに依頼）
+# この後、AI や gh コマンドなどを使って PR を作成：
 # - ブランチ名: $BRANCH
 # - 差分: git diff main...HEAD --name-status
 # - コミット履歴: git log main..HEAD --oneline
@@ -164,75 +156,27 @@ git log origin/main..HEAD --oneline
 
 ## PRタイトルとメッセージのルール
 
-### タイトルフォーマット
-
-```
-<Prefix>: <日本語要約（命令形/簡潔に）>
-```
-
-Prefix例：
-
-- `feat:` - 新機能の追加
-- `fix:` - バグ修正
-- `refactor:` - リファクタリング
-- `perf:` - パフォーマンス改善
-- `test:` - テスト追加/修正
-- `docs:` - ドキュメント更新
-- `build:` - ビルド/依存関係の変更
-- `ci:` - CI関連の変更
-- `chore:` - 雑務
-
-### メッセージ構造（必須）
-
-```markdown
-## 概要
-
-このPRで実装した内容の要約を記載
-
-## 変更内容
-
-- 変更点1の説明
-- 変更点2の説明
-- 変更点3の説明
-
-## 技術的な詳細
-
-必要に応じて実装の詳細を記載
-
-## テスト内容
-
-- 実施したテストの概要
-- 動作確認の結果
-
-## 関連Issue
-
-Closes #123
-Refs #456
-```
+- PR タイトルや本文の詳細なフォーマットは、`.cursor/rules/pr-message-format.mdc` のルールに従ってください。
+- 本コマンドは、そのルールで定義された構造化フォーマット（概要／変更内容／テスト内容など）で PR メッセージを記述することを前提としています。
 
 ## 注意事項
 
-- コミットメッセージは規約に従ってください（例：`feat: ...`, `fix: ...`）
-- `package.json` が存在しない場合、品質チェックは自動的にスキップされます
-- `package.json` が存在する場合、品質チェックで失敗した場合は、その時点で停止します。修正後に再実行してください
-- `git status` で差分を確認してからの実行を推奨します
-- PRタイトルは50文字以内、日本語で簡潔に
-- PRメッセージは構造化フォーマット必須（緊急修正以外）
-- `\n` などのエスケープシーケンスを直接使用しない
+- コミットメッセージのフォーマットやメッセージ生成の原則は、`.cursor/rules/commit-message-format.mdc` の規約に従ってください。
+- `git status` や `git diff` で差分を確認してからの実行を推奨します。
 
 ## トラブルシューティング
 
-### プッシュは成功したがPR作成に失敗した場合
+### プッシュは成功したが PR 作成に失敗した場合
 
 ```bash
 # PRのみを手動作成
 gh pr create --title "タイトル" --body "メッセージ" --base main
 
-# またはWebブラウザで作成
-# https://github.com/kinopeee/chatnative-v1-design/pulls
+# または Web ブラウザで作成
+# GitHub 上の対象リポジトリの Pull Requests ページを開き、UI から PR を作成してください。
 ```
 
-### ブランチ名からPrefixを推測
+### ブランチ名から Prefix を推測
 
 | ブランチ接頭辞 | Prefix   |
 | -------------- | -------- |
@@ -250,25 +194,24 @@ gh pr create --title "タイトル" --body "メッセージ" --base main
 
 ```bash
 # 例1: 最小限の指定（AIが自動生成）
-MSG="fix: CSRF検証をテスト環境でスキップ"
+MSG="fix: 不要なデバッグログ出力を削除"
 BRANCH=$(git branch --show-current)
 if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then
   echo "⚠️ main/master への直接プッシュは禁止です"; exit 1;
 fi
-if [ -f package.json ]; then
-  npm run lint:fix && npm run type-check && npm run build
-else
-  echo "ℹ️ package.json が見つかりません。品質チェックをスキップします。"
-fi && \
+
+# 任意の品質チェック（必要な場合のみ）
+# ./scripts/quality-check.sh || exit 1
+
 git add -A && git commit -m "$MSG" && git push -u origin "$BRANCH"
 
-# この後、AIに以下を依頼：
-# "ブランチ fix/http-client-skip-csrf-for-tests に対してPRを作成してください。
+# この後、AI に以下を依頼：
+# "ブランチ $BRANCH に対して PR を作成してください。
 #  ブランチ名と差分から適切なタイトルとメッセージを生成してください。"
 ```
 
 ## 関連ドキュメント
 
-- コミットメッセージルール: `.cursor/rules/git-commit-message-format.mdc`
-- PRフォーマットルール: `.cursor/rules/pr-format.mdc`
-- 開発フロー: `docs/local-development-guide.md`
+- コミットメッセージルール: `.cursor/rules/commit-message-format.mdc`
+- PR メッセージルール（任意）: `.cursor/rules/pr-message-format.mdc`
+- 開発フロー: プロジェクト固有の README / CONTRIBUTING / 開発ガイド等

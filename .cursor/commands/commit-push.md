@@ -2,38 +2,37 @@
 
 ## 概要
 
-現在のブランチに対して変更をコミットし、リモートへプッシュします。main/master への直接プッシュは禁止ポリシーのため、ブランチチェックを含みます。`package.json` が存在する場合のみ、コミット前にローカル品質チェック（lint、type-check、build）を実行します。
+現在のブランチに対して変更をコミットし、リモートへプッシュするための汎用的なコマンド例です。  
+main/master への直接プッシュ禁止や、コミット前に実行する品質チェック（lint / test / build など）は、各プロジェクトのポリシーに応じてこのテンプレートを調整してください。
 
 ## 前提条件
 
 - 変更済みファイルが存在すること
 - リモート `origin` が設定済みであること
-- `package.json` が存在する場合のみ、Node 環境で `npm` コマンドが利用可能であること
 
 ## 実行手順（対話なし）
 
 1. ブランチ確認（main/master 直プッシュ防止）
-2. `package.json` の存在確認
-3. 存在する場合のみ品質チェック（lint:fix → type-check → build）
-4. 変更のステージング（`git add -A`）
-5. コミット（引数または環境変数のメッセージ使用）
-6. プッシュ（`git push -u origin <current-branch>`）
+2. 必要に応じて品質チェック（lint / test / build など）を実行
+3. 変更のステージング（`git add -A`）
+4. コミット（引数または環境変数のメッセージ使用）
+5. プッシュ（`git push -u origin <current-branch>`）
 
 ## 使い方
 
 ### A) 安全な一括実行（メッセージ引数版）
 
 ```bash
-MSG="<プレフィックス>: <日本語サマリ>" \
+MSG="<Prefix>: <サマリ（命令形/簡潔に）>" \
 BRANCH=$(git branch --show-current) && \
 if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then \
   echo "⚠️ main/master への直接プッシュは禁止です"; exit 1; \
-fi && \
-if [ -f package.json ]; then \
-  npm run lint:fix && npm run type-check && npm run build; \
-else \
-  echo "ℹ️ package.json が見つかりません。品質チェックをスキップします。"; \
-fi && \
+fi
+
+# 任意の品質チェック（必要な場合のみ）
+# 例:
+# ./scripts/lint.sh && ./scripts/test.sh && ./scripts/build.sh || exit 1
+
 git add -A && \
 git commit -m "$MSG" && \
 git push -u origin "$BRANCH"
@@ -42,9 +41,15 @@ git push -u origin "$BRANCH"
 例：
 
 ```bash
-MSG="fix: 余計なログ出力を削除" BRANCH=$(git branch --show-current) && \
-if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then echo "⚠️ main/master 直プッシュは禁止"; exit 1; fi && \
-if [ -f package.json ]; then npm run lint:fix && npm run type-check && npm run build; else echo "ℹ️ package.json が見つかりません。品質チェックをスキップします。"; fi && \
+MSG="fix: 不要なデバッグログ出力を削除" \
+BRANCH=$(git branch --show-current) && \
+if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then \
+  echo "⚠️ main/master への直接プッシュは禁止です"; exit 1; \
+fi
+
+# 任意の品質チェック（必要な場合のみ）
+# ./scripts/quality-check.sh || exit 1
+
 git add -A && git commit -m "$MSG" && git push -u origin "$BRANCH"
 ```
 
@@ -57,19 +62,16 @@ if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then
   echo "⚠️ main/master への直接プッシュは禁止です"; exit 1;
 fi
 
-# 2) ローカル品質チェック（package.json が存在する場合のみ）
-if [ -f package.json ]; then
-  echo "品質チェック実行中..."
-  npm run lint:fix && npm run type-check && npm run build || exit 1
-else
-  echo "ℹ️ package.json が見つかりません。品質チェックをスキップします。"
-fi
+# 2) 任意のローカル品質チェック（必要に応じて追加）
+# 例:
+# echo "品質チェック実行中..."
+# ./scripts/lint.sh && ./scripts/test.sh && ./scripts/build.sh || exit 1
 
 # 3) 変更をステージング
 git add -A
 
 # 4) コミット（メッセージを編集）
-git commit -m "<Prefix>: <日本語サマリ>"
+git commit -m "<Prefix>: <サマリ（命令形/簡潔に）>"
 
 # 5) プッシュ
 git push -u origin "$BRANCH"
@@ -77,7 +79,5 @@ git push -u origin "$BRANCH"
 
 ## ノート
 
-- コミットメッセージは規約に従ってください（例：`feat: ...`, `fix: ...`）。
-- `package.json` が存在しない場合、品質チェックは自動的にスキップされます。
-- `package.json` が存在する場合、品質チェックで失敗した場合は、その時点で停止します。修正後に再実行してください。
-- 先に `git status` で差分を確認してからの実行を推奨します。
+- コミットメッセージのフォーマットやメッセージ生成の原則は、`.cursor/rules/commit-message-format.mdc` などの規約に従ってください。
+- 先に `git status` や `git diff` で差分を確認してからの実行を推奨します。

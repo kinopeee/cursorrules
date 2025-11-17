@@ -29,6 +29,7 @@ This repository manages custom instructions for Cursor.
 2. If the path exists, save `v5.en.mdc` (English) or `v5.mdc` (Japanese) there.
 3. If you also want to enforce the test strategy rules, save `test-strategy.mdc` (Japanese) and/or `test-strategy.en.mdc` (English) under the same `.cursor/rules` folder.
 4. To enable the commit message format rules, save `commit-message-format.mdc` (Japanese) under the same `.cursor/rules` folder.
+5. To enable the PR message format rules, save `pr-format.mdc` (Japanese) under the same `.cursor/rules` folder.
 - Because their application condition is "always", they will be referenced in subsequent chats as long as they exist at the designated path.
 - Both Japanese and English versions are set to `alwaysApply: true`, so you may want to adjust this setting based on your preferred language and whether you want the test rules enabled by default.
 
@@ -37,6 +38,10 @@ This repository manages custom instructions for Cursor.
 - `commit-message-format.mdc`  
   - **Role**: Defines the commit message format (prefix, summary, bullet-list body) and prohibited patterns.
   - **Characteristics**: Based on Conventional Commits, with additional guidelines such as `language`-based language selection and diff-based message generation tailored for this repository.
+
+- `pr-format.mdc`  
+  - **Role**: Defines the format for PR titles and bodies (prefix-style titles and structured sections such as Overview, Changes, Tests) and prohibited patterns.
+  - **Characteristics**: Aligns PR messages with the commit message conventions and encourages structured descriptions that facilitate review and understanding of change intent.
 
 - `test-strategy.mdc` / `test-strategy.en.mdc`  
   - **Role**: Defines test strategy rules for test implementation and maintenance, including equivalence partitioning, boundary value analysis, and coverage requirements.
