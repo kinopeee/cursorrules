@@ -62,6 +62,7 @@ This document complements it by organizing **user-side operational options and h
 - Even when false positives make it hard to work:
   - First consider reducing noise via **organizing trusted sources** and **alert suppression settings**.
   - Only when the impact remains significant should you temporarily switch to **Apply Intelligently / Apply Manually**, and be sure to revert the setting after the work is done.
+- When you want to execute commands from external runbooks or wikis, we recommend a workflow where the AI first shows you the concrete commands and you explicitly approve them (for example, "Yes, run this command"), rather than implicitly executing imperative sentences from the document body.
 - When using an English UI or working in a multilingual environment, the same guard logic applies.  
   If your workspace contains both Japanese and English versions of the rules/guides, refer to whichever matches your working language as needed.
 
