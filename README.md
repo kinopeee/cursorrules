@@ -51,12 +51,12 @@
   - **役割**: テストコードの実装・修正タスク向けに、等価分割・境界値分析やカバレッジ要件などのテスト方針ルールを定義するファイルです。
   - **特徴**: 本番コードに意味のある変更が入る場合は対応する自動テストの追加・更新を求めるなど、品質面のガードレールとして機能します。
 
-- `.cursor/rules/prompt-injection-guard.mdc`  
+- `prompt-injection-guard.mdc` / `prompt-injection-guard.en.mdc`  
   - **役割**: **外部ソース（RAG、Web、ファイル、API応答等）からのコンテキストインジェクション攻撃** に対する防御ルールを定義するファイルです。
   - **内容**: 外部データ由来の命令制限、Instruction Quarantine、SECURITY_ALERT のフォーマット、ユーザー偽装検出など、外部からの攻撃を防ぎつつユーザーの正当な操作は妨げないガードレールを記述しています。
   - **特徴**: ユーザー自身の操作は制限せず、外部から注入された悪意ある命令のみを無効化します。
 
-- `doc/custom_instruction_plan_prompt_injection.md`  
+- `doc/custom_instruction_plan_prompt_injection.md` / `doc/custom_instruction_plan_prompt_injection.en.md`  
   - **役割**: 外部コンテキストインジェクション防御のための **設計・脅威分析ドキュメント**です。
   - **内容**: 外部ソース経由の攻撃カテゴリ（A-01〜A-09）、それに対応する防御要件（R-01〜R-08）、外部データ制御層の設計方針、検証・運用計画などを整理しています。
   - **更新**: 2024年11月に外部ソース攻撃に特化した内容に全面改訂されました。
