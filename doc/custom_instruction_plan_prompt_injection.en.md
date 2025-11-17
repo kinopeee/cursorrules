@@ -4,7 +4,6 @@
 
 - This document summarizes a defense design **specialized for context injection attacks originating from external sources (RAG, web, files, API responses, etc.)**.
 - The goal is to **neutralize only malicious instructions injected from external sources**, while leaving the user's own legitimate instructions and operations out of scope for restriction.
-- References: `prompt_injection_report_ja.md`, `compass_artifact_wf-fbee27dd-8fb2-468c-a198-6a8b42d514fb_text_markdown.md`
 
 ## 2. Threat landscape (known + shared references)
 
