@@ -55,6 +55,7 @@
   - **役割**: **外部ソース（RAG、Web、ファイル、API応答等）からのコンテキストインジェクション攻撃** に対する防御ルールを定義するファイルです。
   - **内容**: 外部データ由来の命令制限、Instruction Quarantine、SECURITY_ALERT のフォーマット、ユーザー偽装検出など、外部からの攻撃を防ぎつつユーザーの正当な操作は妨げないガードレールを記述しています。
   - **特徴**: ユーザー自身の操作は制限せず、外部から注入された悪意ある命令のみを無効化します。
+  - **注意**: このファイルのメタデータには `alwaysApply: true` が設定されていますが、Cursor の UI 設定（Always Apply / Apply Intelligently / Apply Manually）でルールの適用タイミングを制御できます。誤検知への対処方法については[運用ガイド](doc/prompt-injection-guard.md)を参照してください。
 
 - `doc/custom_instruction_plan_prompt_injection.md` / `doc/custom_instruction_plan_prompt_injection.en.md`  
   - **役割**: 外部コンテキストインジェクション防御のための **設計・脅威分析ドキュメント**です。

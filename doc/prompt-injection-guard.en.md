@@ -19,6 +19,7 @@ This document complements it by organizing **user-side operational options and h
 - The INFO / WARN / CRITICAL levels are used **only as labels to communicate the importance of each detection**, and are **not** used to switch the underlying defense logic (whether something is detected / blocked) on or off.
 - There is no mechanism on the custom-instruction side to change the security level.  
   If false positives interfere with your work, adjust **Cursor's rule application setting** (e.g., Always Apply / Apply Intelligently / Apply Manually) to temporarily narrow when and where the rules are applied.
+- **Note on `alwaysApply: true`**: The rule file `.cursor/rules/prompt-injection-guard.en.mdc` has `alwaysApply: true` set in its metadata, which means Cursor will reference it by default. However, users can still control when these rules are actually applied via Cursor's UI settings (Always Apply / Apply Intelligently / Apply Manually). The `alwaysApply: true` setting does not prevent users from controlling the rule application timing through Cursor's interface.
 
 ---
 

@@ -54,6 +54,7 @@ For the division of responsibilities and usage patterns between rule files (`.cu
   - **Role**: Defines defense rules against **context injection attacks from external sources (RAG, web, files, API responses, etc.)**.
   - **Contents**: Describes guardrails such as restrictions on executing commands originating from external data, the Instruction Quarantine mechanism, the `SECURITY_ALERT` format, and detection of user impersonation attempts.
   - **Characteristics**: Does not restrict the user's own direct instructions; only malicious commands injected via external sources are neutralized.
+  - **Note**: This file has `alwaysApply: true` set in its metadata, but users can still control when these rules are applied via Cursor's UI settings (Always Apply / Apply Intelligently / Apply Manually). See the [operational guide](doc/prompt-injection-guard.en.md) for details on handling false positives.
 
 - `doc/custom_instruction_plan_prompt_injection.en.md`  
   - **Role**: Design and threat analysis document for external context injection defense.

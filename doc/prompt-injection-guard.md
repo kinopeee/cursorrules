@@ -18,6 +18,7 @@ title: Prompt Injection Guard 運用ガイド
 - このルールは **厳格モード相当を常時適用** し、すべての検出機能を有効にしている。
 - INFO / WARN / CRITICAL のレベルは、**検出結果の重要度をユーザーに通知するためのラベルにのみ使用し、防御ロジック（検出・遮断の有無）を切り替える用途には使用しない**。
 - カスタムインストラクション側にはセキュリティレベルを切り替える仕組みはなく、誤検知によって作業に支障が出る場合は、**Cursor 側のルール適用設定（例: Always Apply / Apply Intelligently / Apply Manually）を変更して、一時的に適用範囲やタイミングを調整する**。
+- **`alwaysApply: true` についての注記**: ルールファイル `.cursor/rules/prompt-injection-guard.mdc` のメタデータには `alwaysApply: true` が設定されており、Cursor がデフォルトでこのルールを参照します。ただし、ユーザーは Cursor の UI 設定（Always Apply / Apply Intelligently / Apply Manually）でルールの実際の適用タイミングを制御できます。`alwaysApply: true` の設定は、Cursor のインターフェースを通じたルール適用タイミングの制御を妨げるものではありません。
 
 ---
 
