@@ -52,7 +52,7 @@ git push -u origin "$BRANCH"
 # - mcp_github_create_pull_request / gh pr create 等で PR 作成
 ```
 
-> 注意: MCP（Model Context Protocol）はエージェントからGitHub等の外部サービスを安全に操作するための標準プロトコルです。本手順ではPR作成にMCPのGitHub連携を使用します。利用にはMCP対応環境の設定が必要です。参考: https://modelcontextprotocol.io/
+> 注意: MCP（Model Context Protocol）はエージェントからGitHub等の外部サービスを安全に操作するための標準プロトコルです。本手順ではPR作成にMCPのGitHub連携を使用します。利用にはMCP対応環境の設定が必要です。参考: <https://modelcontextprotocol.io/>
 
 ### B) 手動で PR タイトル・メッセージを指定
 

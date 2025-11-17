@@ -55,7 +55,7 @@ git push -u origin "$BRANCH"
 ```
 
 > Note: MCP (Model Context Protocol) is a standard protocol for safely allowing agents to interact with external services like GitHub.  
-> To use it for PR creation, you will need an MCP-compatible environment and GitHub integration. See: https://modelcontextprotocol.io/
+> To use it for PR creation, you will need an MCP-compatible environment and GitHub integration. See: <https://modelcontextprotocol.io/>
 
 ### B) Manually specifying PR title and body
 
