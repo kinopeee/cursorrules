@@ -1,6 +1,8 @@
 # cursorrules "v5"
 
-English | [日本語](README.md)
+🇬🇧 English Documentation
+
+[🌏 Back to Top](../README.md) | [🇯🇵 日本語](../ja/README.md)
 
 This repository manages custom instructions for Cursor.
 
@@ -8,7 +10,7 @@ This repository manages custom instructions for Cursor.
 
 - This `v5` is a set of custom instructions optimized for the Cursor Agent.
 - For the Cursor Agent to operate autonomously (without human intervention), Auto-Run must be configured appropriately.
-- See the [changelog](CHANGELOG.en.md) for the latest updates.
+- See the [changelog](CHANGELOG.md) for the latest updates.
 
 ## Overview
 
@@ -20,7 +22,7 @@ This repository manages custom instructions for Cursor.
     1. Independent tasks are executed in parallel to improve throughput.
 - In addition, this version codifies detailed tooling policies (e.g., always read files before editing, rely on `apply_patch` for modifications, and run terminal commands only when necessary with safe flags) so the Cursor Agent executes tasks with consistent safeguards.
 - `v5` was initially created with Anthropic Prompt Generator and has since gone through cycles of evaluation by contemporary models and practical improvements. When customizing, we recommend having your chosen AI evaluate it as well.
-- For detailed updates, including task classification, error handling tiers, and tooling policies, see [CHANGELOG.en.md](CHANGELOG.en.md).
+- For detailed updates, including task classification, error handling tiers, and tooling policies, see [CHANGELOG.md](CHANGELOG.md).
 
 - This repository itself also serves as a best-practice example, providing rule files for commit/PR messages and workflow command templates for commit, push, and PR creation.
 
@@ -34,7 +36,7 @@ This repository manages custom instructions for Cursor.
 - Because their application condition is "always", they will be referenced in subsequent chats as long as they exist at the designated path.
 - Both Japanese and English versions are set to `alwaysApply: true`, so you may want to adjust this setting based on your preferred language and whether you want the test rules enabled by default.
 
-For the division of responsibilities and usage patterns between rule files (`.cursor/rules/*.mdc`) and workflow commands (`.cursor/commands/*.md`), see [doc/rules-and-workflows.en.md](doc/rules-and-workflows.en.md).
+For the division of responsibilities and usage patterns between rule files (`.cursor/rules/*.mdc`) and workflow commands (`.cursor/commands/*.md`), see [doc/rules-and-workflows.md](doc/rules-and-workflows.md).
 
 ### Guardrail-related files
 
@@ -50,13 +52,13 @@ For the division of responsibilities and usage patterns between rule files (`.cu
   - **Role**: Defines test strategy rules for test implementation and maintenance, including equivalence partitioning, boundary value analysis, and coverage requirements.
   - **Purpose**: Serves as a quality guardrail by requiring corresponding automated tests whenever meaningful changes are made to production code, where reasonably feasible.
 
-- `.cursor/rules/prompt-injection-guard.en.mdc`  
+- `prompt-injection-guard.mdc`  
   - **Role**: Defines defense rules against **context injection attacks from external sources (RAG, web, files, API responses, etc.)**.
   - **Contents**: Describes guardrails such as restrictions on executing commands originating from external data, the Instruction Quarantine mechanism, the `SECURITY_ALERT` format, and detection of user impersonation attempts.
   - **Characteristics**: Does not restrict the user's own direct instructions; only malicious commands injected via external sources are neutralized.
-  - **Note**: This file has `alwaysApply: true` set in its metadata, but users can still control when these rules are applied via Cursor's UI settings (Always Apply / Apply Intelligently / Apply Manually). See the [operational guide](doc/prompt-injection-guard.en.md) for details on handling false positives.
+  - **Note**: This file has `alwaysApply: true` set in its metadata, but users can still control when these rules are applied via Cursor's UI settings (Always Apply / Apply Intelligently / Apply Manually). See the [operational guide](doc/prompt-injection-guard.md) for details on handling false positives.
 
-- `doc/custom_instruction_plan_prompt_injection.en.md`  
+- `doc/custom_instruction_plan_prompt_injection.md`  
   - **Role**: Design and threat analysis document for external context injection defense.
   - **Contents**: Organizes attack categories (A-01–A-09) via external sources, corresponding defense requirements (R-01–R-08), design principles for the external data control layer, and validation/operations planning.
   - **Update**: Fully revised in November 2024 to focus on external-source attacks.
@@ -64,7 +66,7 @@ For the division of responsibilities and usage patterns between rule files (`.cu
 
 ## Translation Guide
 
-For the recommended prompt to translate custom instructions into other languages, see [TRANSLATION_GUIDE.md](TRANSLATION_GUIDE.md).
+For the recommended prompt to translate custom instructions into other languages, see [TRANSLATION_GUIDE.md](../TRANSLATION_GUIDE.md).
 
 ## Notes
 
@@ -72,7 +74,7 @@ For the recommended prompt to translate custom instructions into other languages
 
 ## License
 
-Released under the MIT License. See [LICENSE](LICENSE) for details.
+Released under the MIT License. See [LICENSE](../LICENSE) for details.
 
 ## Support
 

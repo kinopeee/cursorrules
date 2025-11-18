@@ -4,12 +4,12 @@ title: Prompt Injection Guard Operational Guide
 
 ## Overview
 
-The file `.cursor/rules/prompt-injection-guard.en.mdc` defines the **core defense logic** that the AI must obey immediately.  
+The file `.cursor/rules/prompt-injection-guard.mdc` defines the **core defense logic** that the AI must obey immediately.  
 This document complements it by organizing **user-side operational options and how to handle false positives**.
 
 **Related documents:**
-- Threat analysis and design background: [`custom_instruction_plan_prompt_injection.en.md`](custom_instruction_plan_prompt_injection.en.md)
-- Implementation rules: [`.cursor/rules/prompt-injection-guard.en.mdc`](../.cursor/rules/prompt-injection-guard.en.mdc)
+- Threat analysis and design background: [`custom_instruction_plan_prompt_injection.md`](custom_instruction_plan_prompt_injection.md)
+- Implementation rules: [`.cursor/rules/prompt-injection-guard.mdc`](../.cursor/rules/prompt-injection-guard.mdc)
 
 ---
 
@@ -19,7 +19,7 @@ This document complements it by organizing **user-side operational options and h
 - The INFO / WARN / CRITICAL levels are used **only as labels to communicate the importance of each detection**, and are **not** used to switch the underlying defense logic (whether something is detected / blocked) on or off.
 - There is no mechanism on the custom-instruction side to change the security level.  
   If false positives interfere with your work, adjust **Cursor's rule application setting** (e.g., Always Apply / Apply Intelligently / Apply Manually) to temporarily narrow when and where the rules are applied.
-- **Note on `alwaysApply: true`**: The rule file `.cursor/rules/prompt-injection-guard.en.mdc` has `alwaysApply: true` set in its metadata, which means Cursor will reference it by default. However, users can still control when these rules are actually applied via Cursor's UI settings (Always Apply / Apply Intelligently / Apply Manually). The `alwaysApply: true` setting does not prevent users from controlling the rule application timing through Cursor's interface.
+- **Note on `alwaysApply: true`**: The rule file `.cursor/rules/prompt-injection-guard.mdc` has `alwaysApply: true` set in its metadata, which means Cursor will reference it by default. However, users can still control when these rules are actually applied via Cursor's UI settings (Always Apply / Apply Intelligently / Apply Manually). The `alwaysApply: true` setting does not prevent users from controlling the rule application timing through Cursor's interface.
 
 ---
 
@@ -58,7 +58,7 @@ This document complements it by organizing **user-side operational options and h
 
 ## 4. Practical recommendations
 
-- In normal operation, keep `.cursor/rules/prompt-injection-guard.en.mdc` set to **Always Apply** so that the guard is always active.
+- In normal operation, keep `.cursor/rules/prompt-injection-guard.mdc` set to **Always Apply** so that the guard is always active.
 - Even when false positives make it hard to work:
   - First consider reducing noise via **organizing trusted sources** and **alert suppression settings**.
   - Only when the impact remains significant should you temporarily switch to **Apply Intelligently / Apply Manually**, and be sure to revert the setting after the work is done.
@@ -67,7 +67,7 @@ This document complements it by organizing **user-side operational options and h
   If your workspace contains both Japanese and English versions of the rules/guides, refer to whichever matches your working language as needed.
 
 This guide is about **how to operate the system**, not about changing the defense logic itself.  
-The strict guardrails the AI must follow are always defined by `.cursor/rules/prompt-injection-guard.en.mdc`.
+The strict guardrails the AI must follow are always defined by `.cursor/rules/prompt-injection-guard.mdc`.
 
 ---
 

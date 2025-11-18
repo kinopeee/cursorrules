@@ -1,81 +1,128 @@
-# cursorrules 「v5」
+# cursorrules "v5"
 
-[English](README.en.md) | 日本語
+🇬🇧 **English** | 🇯🇵 **日本語**
 
-このリポジトリは、Cursor用のカスタムインストラクションを管理するためのものです。
+---
 
-## 前提
+## 🌏 Select Your Language / 言語を選択
 
-- この`v5`は、Cursor Agent に最適化されたカスタムインストラクションです
-- Cursor Agent が自走（人の介入を受けずに自律処理）ができる前提として、Auto-Run の設定が適切に行われている必要があります。
-- 最新の更新内容については[更新履歴](CHANGELOG.md)を参照してください。
+This repository provides professional custom instructions optimized for Cursor IDE.  
+このリポジトリは、Cursor IDE 用に最適化されたプロフェッショナルなカスタムインストラクションを提供します。
 
-## 概要
+### 📂 Language-specific Documentation
 
-- Cursor のエージェント機能がリリースされてから、様々なパターンの処理を通して感じたのが「分析力の不足」でした。そのため、モデル（当時のClaude 3.5 Sonnet）が本来持っている分析能力を引き出せるように工夫し始めたのが、私のカスタムインストラクション作成の始まりです。
-- 当初のテーマは、分析能力向上と自走力を高めることがでしたが、その後、モジュールやリソースの重複生成、意図せぬ、AIによるデザインの変更、エラー処理の無限ループなどの防止にも取り組み、モデルの刷新と性能向上と相まって、それなりの成果を残せたように思います。
-- このバージョンアップグレードのフォーカスは GPT-5.1 最適化です：
-    1. チェックリスト式の実装計画を立ててから着手。実行後はチェックリストごとに完了を確認することで、より計画性の高いタスク遂行が可能になっています。
-    1. タスクを軽量・標準・重要の3段階に分類し、軽量タスクでは1〜2文の簡潔な報告にとどめ、重いタスクほど手順と検証を厚くするようになっています。
-    1. 並行処理できるタスクは並行処理を行うことで、処理速度が向上します。
-- さらに、`read_file` や `apply_patch`、`run_terminal_cmd` などのツール利用ポリシーを明文化し、常に安全な手順・権限でタスクを進めるワークフローを整備しています。
-- `v5` は、初期にAnthropic Prompt Generatorで作成、それ以降、その時期の最新モデルによる評価、実践による改善を繰り返してきました。カスタマイズの際も、お使いになるAIによる評価を行うことを推奨します。
-- 詳細な更新内容（タスク分類、エラー処理の段階化、ツール利用ポリシーなど）については[CHANGELOG.md](CHANGELOG.md)を参照してください。
+- 🇯🇵 **日本語版**: [ja/README.md](ja/README.md)
+- 🇬🇧 **English**: [en/README.md](en/README.md)
 
-- また、本リポジトリ自体がベストプラクティス例として、コミットメッセージ／PRメッセージのルールファイルおよびコミット・プッシュ・PR作成のワークフローコマンドのサンプルを含んでいます。
+---
 
-## 使用方法
+## ⚡ Quick Start
 
-1. `.cursor/rules` がまだ存在しない場合は、フォルダを作成してください。
-2. パスが存在する場合は、そこに `v5.en.mdc`（英語）または `v5.mdc`（日本語）を保存してください。
-3. テスト方針ルールを有効にしたい場合は、同じフォルダに `test-strategy.mdc`（日本語）または `test-strategy.en.mdc`（英語）を保存してください。
-4. コミットメッセージ規約を有効にしたい場合は、同じフォルダに `commit-message-format.mdc`（日本語）または `commit-message-format.en.mdc`（英語）を保存してください。
-5. PR メッセージ規約を有効にしたい場合は、同じフォルダに `pr-message-format.mdc`（日本語）または `pr-message-format.en.mdc`（英語）を保存してください。
-- これらのテスト方針ルールの適用条件はデフォルトで「always」となっているため、所定のパスに存在していれば、それ以降のチャットで自動的に参照されます。
-- 日本語版・英語版の両方で `alwaysApply: true` が設定されているため、利用したい言語やテストルールをデフォルトで有効にするかどうかに応じて、この設定を調整してください。
-- これらを有効にすると、テストコードの実装・修正タスクでは、本リポジトリで定義した等価分割・境界値分析やカバレッジ要件などのテスト方針ルールが自動的に適用されます。
+### For Japanese Users (日本語ユーザー向け)
 
-ルールファイル（`.cursor/rules/*.mdc`）とワークフローコマンド（`.cursor/commands/*.md`）の役割分担と使い方については、[doc/rules-and-workflows.md](doc/rules-and-workflows.md) を参照してください。
+```bash
+# リポジトリをクローン
+git clone https://github.com/kinopee/cursorrules.git
 
-### ガードレール関連ファイル
+# 日本語版の設定をプロジェクトにコピー
+cp -r cursorrules/ja/.cursor ~/your-project/
+```
 
-- `commit-message-format.mdc` / `commit-message-format.en.mdc`  
-  - **役割**: コミットメッセージのフォーマット（Prefix、サマリ、箇条書き本文など）と禁止事項を定義するファイルです。
-  - **特徴**: Conventional Commits をベースにしつつ、`language` による言語指定や差分ベースのメッセージ生成といった、このリポジトリ向けのガイドラインを含みます。
+詳細は [ja/README.md](ja/README.md) をご覧ください。
 
-- `pr-message-format.mdc` / `pr-message-format.en.mdc`  
-  - **役割**: PR タイトルおよび本文のフォーマット（Prefix 付きタイトル、構造化された「概要」「変更内容」「テスト内容」など）と禁止事項を定義するファイルです。
-  - **特徴**: コミットメッセージ規約と整合する形で PR メッセージを構造化し、レビューや変更意図の把握をしやすくするためのガイドラインを提供します。
+### For English Users
 
-- `test-strategy.mdc` / `test-strategy.en.mdc`  
-  - **役割**: テストコードの実装・修正タスク向けに、等価分割・境界値分析やカバレッジ要件などのテスト方針ルールを定義するファイルです。
-  - **特徴**: 本番コードに意味のある変更が入る場合は対応する自動テストの追加・更新を求めるなど、品質面のガードレールとして機能します。
+```bash
+# Clone the repository
+git clone https://github.com/kinopee/cursorrules.git
 
-- `prompt-injection-guard.mdc` / `prompt-injection-guard.en.mdc`  
-  - **役割**: **外部ソース（RAG、Web、ファイル、API応答等）からのコンテキストインジェクション攻撃** に対する防御ルールを定義するファイルです。
-  - **内容**: 外部データ由来の命令制限、Instruction Quarantine、SECURITY_ALERT のフォーマット、ユーザー偽装検出など、外部からの攻撃を防ぎつつユーザーの正当な操作は妨げないガードレールを記述しています。
-  - **特徴**: ユーザー自身の操作は制限せず、外部から注入された悪意ある命令のみを無効化します。
-  - **注意**: このファイルのメタデータには `alwaysApply: true` が設定されていますが、Cursor の UI 設定（Always Apply / Apply Intelligently / Apply Manually）でルールの適用タイミングを制御できます。誤検知への対処方法については[運用ガイド](doc/prompt-injection-guard.md)を参照してください。
+# Copy English configuration to your project
+cp -r cursorrules/en/.cursor ~/your-project/
+```
 
-- `doc/custom_instruction_plan_prompt_injection.md` / `doc/custom_instruction_plan_prompt_injection.en.md`  
-  - **役割**: 外部コンテキストインジェクション防御のための **設計・脅威分析ドキュメント**です。
-  - **内容**: 外部ソース経由の攻撃カテゴリ（A-01〜A-09）、それに対応する防御要件（R-01〜R-08）、外部データ制御層の設計方針、検証・運用計画などを整理しています。
-  - **更新**: 2024年11月に外部ソース攻撃に特化した内容に全面改訂されました。
+See [en/README.md](en/README.md) for details.
 
+---
 
-## 翻訳ガイド
+## 📋 What's Included / 含まれるもの
 
-カスタムインストラクションを他言語へ翻訳する際の推奨プロンプトについては、[TRANSLATION_GUIDE.md](TRANSLATION_GUIDE.md) を参照してください。
+### ✅ Rule Files (`.cursor/rules/*.mdc`)
 
-## 注意事項
+| File | 日本語 | English |
+|------|--------|---------|
+| **v5.mdc** | GPT-5.1最適化のコーディング支援ルール | Coding support rules optimized for GPT-5.1 |
+| **commit-message-format.mdc** | コミットメッセージフォーマット規約 | Commit message format conventions |
+| **pr-message-format.mdc** | PRメッセージフォーマット規約 | PR message format conventions |
+| **test-strategy.mdc** | テスト戦略ルール（等価分割・境界値） | Test strategy rules (equivalence/boundary) |
+| **prompt-injection-guard.mdc** | 外部コンテキストインジェクション防御 | External context injection defense |
 
-- User Rules、Memories に v5 と矛盾する指示が存在すると、モデルが混乱して、効果が減少します。それぞれの内容を十分にご確認ください。
+### ⚙️ Workflow Commands (`.cursor/commands/*.md`)
 
-## ライセンス
+| Command | 日本語 | English |
+|---------|--------|---------|
+| **commit-only.md** | コミットのみ実行 | Execute commit only |
+| **commit-push.md** | コミット＆プッシュ | Commit and push |
+| **commit-push-pr.md** | コミット＆プッシュ＆PR作成 | Commit, push, and create PR |
 
-MITライセンスの下で公開されています。詳細については[LICENSE](LICENSE)ファイルを参照してください。
+---
 
-## サポート
+## 🎯 Key Features / 主な特徴
 
-- このリポジトリのサポートはありませんが、フィードバックは歓迎いたします。また、Cursor関連情報をX（Twitter）で発信しているので、ご興味あればご覧ください。
-[X（Twitter）](https://x.com/kinopee_ai)
+### 🇯🇵 日本語
+
+- **GPT-5.1 最適化**: 適応的推論を活かした効率的なタスク実行
+- **3段階タスク分類**: 軽量・標準・重要タスクに応じた最適なプロセス
+- **並列実行**: 独立したタスクを並列処理して処理速度を向上
+- **安全なツール利用**: read_file/apply_patch/run_terminal_cmd の明確なポリシー
+- **包括的なガードレール**: コミット規約、PR規約、テスト戦略、セキュリティ防御
+
+### 🇬🇧 English
+
+- **GPT-5.1 Optimized**: Efficient task execution leveraging adaptive reasoning
+- **3-Tier Task Classification**: Optimal processes for lightweight/standard/critical tasks
+- **Parallel Execution**: Improved throughput by parallelizing independent tasks
+- **Safe Tool Usage**: Clear policies for read_file/apply_patch/run_terminal_cmd
+- **Comprehensive Guardrails**: Commit conventions, PR conventions, test strategy, security defense
+
+---
+
+## 📖 Documentation / ドキュメント
+
+### 🇯🇵 日本語
+
+- [使い方ガイド](ja/README.md)
+- [変更履歴](ja/CHANGELOG.md)
+- [ルールとワークフロー](ja/doc/rules-and-workflows.md)
+- [プロンプトインジェクション防御](ja/doc/prompt-injection-guard.md)
+
+### 🇬🇧 English
+
+- [Usage Guide](en/README.md)
+- [Changelog](en/CHANGELOG.md)
+- [Rules and Workflows](en/doc/rules-and-workflows.md)
+- [Prompt Injection Guard](en/doc/prompt-injection-guard.md)
+
+---
+
+## 📄 License / ライセンス
+
+MIT License - See [LICENSE](LICENSE) for details.  
+MITライセンス - 詳細は [LICENSE](LICENSE) を参照してください。
+
+---
+
+## 💬 Support / サポート
+
+### 🇯🇵 日本語
+
+このリポジトリに公式サポートはありませんが、フィードバックは歓迎します。  
+Cursor関連情報を X (Twitter) で発信しています: [@kinopee_ai](https://x.com/kinopee_ai)
+
+### 🇬🇧 English
+
+There is no official support for this repository, but feedback is welcome.  
+Follow on X (Twitter) for Cursor-related updates: [@kinopee_ai](https://x.com/kinopee_ai)
+
+---
+
+**Made with ❤️ for Cursor IDE users worldwide**

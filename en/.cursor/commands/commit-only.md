@@ -8,7 +8,7 @@ It does **not** handle pushing to the remote or enforcing branch strategies (suc
 ## Preconditions
 
 - There are modified files.
-- The commit message format is defined by a rule file such as `.cursor/rules/commit-message-format.en.mdc` (or `.mdc` for other languages).
+- The commit message format is defined by a rule file such as `.cursor/rules/commit-message-format.mdc`.
 
 ## Steps (non-interactive)
 
@@ -48,7 +48,7 @@ git commit -m "<Prefix>: <summary (imperative / concise)>"
 
 ## Notes
 
-- The commit message format and message generation principles should follow `.cursor/rules/commit-message-format.en.mdc` (or the appropriate language-specific rule file).
+- The commit message format and message generation principles should follow `.cursor/rules/commit-message-format.mdc`.
 - Branch strategy (e.g. disallowing direct commits to main) and pushing to the remote (`git push`) are **out of scope** for this command. Define those in project-specific README / CONTRIBUTING / separate commands as needed.
 
 
