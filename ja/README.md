@@ -29,10 +29,10 @@
 ## 使用方法
 
 1. `.cursor/rules` がまだ存在しない場合は、フォルダを作成してください。
-2. パスが存在する場合は、そこに `v5.en.mdc`（英語）または `v5.mdc`（日本語）を保存してください。
-3. テスト方針ルールを有効にしたい場合は、同じフォルダに `test-strategy.mdc`（日本語）または `test-strategy.en.mdc`（英語）を保存してください。
-4. コミットメッセージ規約を有効にしたい場合は、同じフォルダに `commit-message-format.mdc`（日本語）または `commit-message-format.en.mdc`（英語）を保存してください。
-5. PR メッセージ規約を有効にしたい場合は、同じフォルダに `pr-message-format.mdc`（日本語）または `pr-message-format.en.mdc`（英語）を保存してください。
+2. パスが存在する場合は、`ja/.cursor/rules/v5.mdc`（日本語）または `en/.cursor/rules/v5.mdc`（英語）をコピーして配置してください（通常は `v5.mdc` として保存します）。
+3. テスト方針ルールを有効にしたい場合は、同じフォルダに `ja/.cursor/rules/test-strategy.mdc`（日本語）または `en/.cursor/rules/test-strategy.mdc`（英語）をコピーしてください。
+4. コミットメッセージ規約を有効にしたい場合は、同じフォルダに `ja/.cursor/rules/commit-message-format.mdc`（日本語）または `en/.cursor/rules/commit-message-format.mdc`（英語）をコピーしてください。
+5. PR メッセージ規約を有効にしたい場合は、同じフォルダに `ja/.cursor/rules/pr-message-format.mdc`（日本語）または `en/.cursor/rules/pr-message-format.mdc`（英語）をコピーしてください。
 - これらのテスト方針ルールの適用条件はデフォルトで「always」となっているため、所定のパスに存在していれば、それ以降のチャットで自動的に参照されます。
 - 日本語版・英語版の両方で `alwaysApply: true` が設定されているため、利用したい言語やテストルールをデフォルトで有効にするかどうかに応じて、この設定を調整してください。
 - これらを有効にすると、テストコードの実装・修正タスクでは、本リポジトリで定義した等価分割・境界値分析やカバレッジ要件などのテスト方針ルールが自動的に適用されます。
@@ -41,25 +41,25 @@
 
 ### ガードレール関連ファイル
 
-- `commit-message-format.mdc` / `commit-message-format.en.mdc`  
+- `ja/.cursor/rules/commit-message-format.mdc` / `en/.cursor/rules/commit-message-format.mdc`  
   - **役割**: コミットメッセージのフォーマット（Prefix、サマリ、箇条書き本文など）と禁止事項を定義するファイルです。
   - **特徴**: Conventional Commits をベースにしつつ、`language` による言語指定や差分ベースのメッセージ生成といった、このリポジトリ向けのガイドラインを含みます。
 
-- `pr-message-format.mdc` / `pr-message-format.en.mdc`  
+- `ja/.cursor/rules/pr-message-format.mdc` / `en/.cursor/rules/pr-message-format.mdc`  
   - **役割**: PR タイトルおよび本文のフォーマット（Prefix 付きタイトル、構造化された「概要」「変更内容」「テスト内容」など）と禁止事項を定義するファイルです。
   - **特徴**: コミットメッセージ規約と整合する形で PR メッセージを構造化し、レビューや変更意図の把握をしやすくするためのガイドラインを提供します。
 
-- `test-strategy.mdc` / `test-strategy.en.mdc`  
+- `ja/.cursor/rules/test-strategy.mdc` / `en/.cursor/rules/test-strategy.mdc`  
   - **役割**: テストコードの実装・修正タスク向けに、等価分割・境界値分析やカバレッジ要件などのテスト方針ルールを定義するファイルです。
   - **特徴**: 本番コードに意味のある変更が入る場合は対応する自動テストの追加・更新を求めるなど、品質面のガードレールとして機能します。
 
-- `prompt-injection-guard.mdc` / `prompt-injection-guard.en.mdc`  
+- `ja/.cursor/rules/prompt-injection-guard.mdc` / `en/.cursor/rules/prompt-injection-guard.mdc`  
   - **役割**: **外部ソース（RAG、Web、ファイル、API応答等）からのコンテキストインジェクション攻撃** に対する防御ルールを定義するファイルです。
   - **内容**: 外部データ由来の命令制限、Instruction Quarantine、SECURITY_ALERT のフォーマット、ユーザー偽装検出など、外部からの攻撃を防ぎつつユーザーの正当な操作は妨げないガードレールを記述しています。
   - **特徴**: ユーザー自身の操作は制限せず、外部から注入された悪意ある命令のみを無効化します。
   - **注意**: このファイルのメタデータには `alwaysApply: true` が設定されていますが、Cursor の UI 設定（Always Apply / Apply Intelligently / Apply Manually）でルールの適用タイミングを制御できます。誤検知への対処方法については[運用ガイド](doc/prompt-injection-guard.md)を参照してください。
 
-- `doc/custom_instruction_plan_prompt_injection.md` / `doc/custom_instruction_plan_prompt_injection.en.md`  
+- `doc/custom_instruction_plan_prompt_injection.md` / `en/doc/custom_instruction_plan_prompt_injection.md`  
   - **役割**: 外部コンテキストインジェクション防御のための **設計・脅威分析ドキュメント**です。
   - **内容**: 外部ソース経由の攻撃カテゴリ（A-01〜A-09）、それに対応する防御要件（R-01〜R-08）、外部データ制御層の設計方針、検証・運用計画などを整理しています。
   - **更新**: 2024年11月に外部ソース攻撃に特化した内容に全面改訂されました。
