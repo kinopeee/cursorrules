@@ -9,7 +9,7 @@ title: Prompt Injection Guard 運用ガイド
 
 **関連ドキュメント:**
 - 脅威分析と設計背景: [`custom_instruction_plan_prompt_injection.md`](custom_instruction_plan_prompt_injection.md)
-- 実装ルール: [`.cursor/rules/prompt-injection-guard.mdc`](../.cursor/rules/prompt-injection-guard.mdc)
+- 実装ルール: [`.cursor/rules/prompt-injection-guard.mdc`](../../.cursor/rules/prompt-injection-guard.mdc)
 
 ---
 
