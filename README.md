@@ -6,8 +6,8 @@
 
 ## 🌏 Select Your Language / 言語を選択
 
-This repository provides professional custom instructions optimized for Cursor IDE.  
-このリポジトリは、Cursor IDE 用に最適化されたプロフェッショナルなカスタムインストラクションを提供します。
+This repository provides custom instructions and custom commands optimized for Cursor.  
+このリポジトリは、Cursor 用に最適化されたカスタムインストラクションやカスタムコマンドを提供します。
 
 ### 📂 Language-specific Documentation
 
