@@ -125,4 +125,4 @@ Follow on X (Twitter) for Cursor-related updates: [@kinopee_ai](https://x.com/ki
 
 ---
 
-**Made with ❤️ for Cursor IDE users worldwide**
+## Made with ❤️ for Cursor IDE users worldwide
