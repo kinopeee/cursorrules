@@ -69,6 +69,53 @@
   - コミットメッセージは `commit-message-format.mdc`、PR メッセージは `pr-message-format.mdc` に従うことを前提に、  
     AI（MCP）や GitHub CLI (`gh`) を使った PR 作成フローの例を示す。
 
+## ルールとワークフローの関係図
+
+```mermaid
+flowchart TB
+
+
+
+    WLabel["ワークフロー
+
+    .cursor/commands/*.md"]
+    
+    subgraph Workflow[" "]
+        direction LR
+        W1[commit-only]
+        W2[commit-push]
+        W3[commit-push-pr]
+    end
+
+    subgraph Rules[" "]
+        direction LR
+        R1[commit-message-format]
+        R2[pr-message-format]
+    end
+
+    RLabel["ルール
+
+    .cursor/rules/*.mdc"]
+
+    WLabel --- Workflow
+    Workflow --> Rules
+    Rules --- RLabel
+
+    W1 -->|参照| R1
+    W2 -->|参照| R1
+    W3 -->|参照| R1
+    W3 -->|参照| R2
+
+    style Workflow fill:#e8e8f4,stroke:#44a
+    style Rules fill:#e8f4e8,stroke:#4a4
+    style WLabel fill:none,stroke:none
+    style RLabel fill:none,stroke:none
+    
+    linkStyle 0 stroke:none
+    linkStyle 1 stroke:none
+    linkStyle 2 stroke:none
+```
+
 ## ベストプラクティスまとめ
 
 - **ルールファイル (.mdc)** には:
@@ -84,5 +131,6 @@
     他プロジェクトでは `language` や Prefix 一覧などを差し替え可能な設計にする。
   - ワークフローは、特定技術スタック（Node / npm / 特定リポジトリ名など）への依存を避け、  
     必要な部分だけコメントとして「例」を示す程度にとどめる。
+    
 
 
