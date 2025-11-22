@@ -1,6 +1,8 @@
 # CHANGELOG
 
-[English](CHANGELOG.en.md) | 日本語
+🇯🇵 日本語版
+
+[🌏 トップページに戻る](../README.md) | [🇬🇧 English](../en/CHANGELOG.md)
 
 このファイルでは、cursorrules v5 プロジェクトの更新履歴を記録しています。
 ## バージョン4.2 (2025-11-17)

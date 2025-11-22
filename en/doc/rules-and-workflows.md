@@ -15,7 +15,7 @@ This document explains how to separate **rules (custom instructions)** and
   These are invoked explicitly as Cursor Commands (e.g. `/commit-only`, `/commit-push`).
   - Examples: commit-only, commit+push, commit+push+PR creation.
 
-## Core Principles
+## Basic Policy
 
 1. **Rules define “what” and “how to write it”**
    - Rules specify message formats (titles, summaries, sections), required fields, and forbidden patterns.
@@ -82,6 +82,53 @@ This document explains how to separate **rules (custom instructions)** and
     - Commit messages follow `commit-message-format.mdc`.
     - PR messages follow `pr-message-format.mdc`.
   - Shows examples using AI (MCP) and GitHub CLI, while keeping details project-agnostic.
+
+## Relationship between Rules and Workflows
+
+```mermaid
+flowchart TB
+
+
+
+    WLabel["Workflows
+
+    .cursor/commands/*.md"]
+    
+    subgraph Workflow[" "]
+        direction LR
+        W1[commit-only]
+        W2[commit-push]
+        W3[commit-push-pr]
+    end
+
+    subgraph Rules[" "]
+        direction LR
+        R1[commit-message-format]
+        R2[pr-message-format]
+    end
+
+    RLabel["Rules
+
+    .cursor/rules/*.mdc"]
+
+    WLabel --- Workflow
+    Workflow --> Rules
+    Rules --- RLabel
+
+    W1 -->|refs| R1
+    W2 -->|refs| R1
+    W3 -->|refs| R1
+    W3 -->|refs| R2
+
+    style Workflow fill:#e8e8f4,stroke:#44a
+    style Rules fill:#e8f4e8,stroke:#4a4
+    style WLabel fill:none,stroke:none
+    style RLabel fill:none,stroke:none
+    
+    linkStyle 0 stroke:none
+    linkStyle 1 stroke:none
+    linkStyle 2 stroke:none
+```
 
 ## Best Practices Summary
 

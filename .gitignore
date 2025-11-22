@@ -1,2 +1,4 @@
 .DS_Store
-#.cursor/commands/
+
+# .cursor 内のすべてのファイルを無視する
+/.cursor/*
