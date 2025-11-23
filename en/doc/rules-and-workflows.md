@@ -85,6 +85,8 @@ This document explains how to separate **rules (custom instructions)** and
 
 ## Relationship between Rules and Workflows
 
+### Commit and PR Workflows
+
 ```mermaid
 flowchart TB
     WLabel[Workflows<br/>.cursor/commands/*.md]
@@ -128,6 +130,46 @@ flowchart TB
     linkStyle 1 stroke:none
     linkStyle 2 stroke:none
 ```
+
+### Test Strategy
+
+```mermaid
+flowchart TB
+    subgraph TestWork[" "]
+        direction LR
+        T1[Test Design]
+        T2[Test Implementation]
+        T3[Coverage Verification]
+    end
+
+    subgraph TestRules[" "]
+        direction TB
+        TR1[test-strategy]
+        space2[ ]
+        V5T[v5: Coding Foundation Rules]
+    end
+    
+    RLabelT[Rules<br/>.cursor/rules/*.mdc]
+
+    TestWork ~~~ TestRules
+    TestRules ~~~ RLabelT
+
+    T1 -->|refs| TR1
+    T2 -->|refs| TR1
+    T3 -->|refs| TR1
+    
+    TR1 -.->|complies| V5T
+
+    style TestWork fill:#e8e8f4,stroke:#44a
+    style TestRules fill:#e8f4e8,stroke:#4a4
+    style RLabelT fill:none,stroke:none
+    style space2 fill:none,stroke:none
+    
+    linkStyle 0 stroke:none
+    linkStyle 1 stroke:none
+```
+
+> **Note**: `test-strategy.mdc` is only applied when creating or updating test code.
 
 ## Best Practices Summary
 

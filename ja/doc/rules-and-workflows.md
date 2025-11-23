@@ -69,7 +69,9 @@
   - コミットメッセージは `commit-message-format.mdc`、PR メッセージは `pr-message-format.mdc` に従うことを前提に、  
     AI（MCP）や GitHub CLI (`gh`) を使った PR 作成フローの例を示す。
 
-## ルールとワークフローの関係図
+## ルールとワークフローの関係
+
+### コミット・PRワークフロー
 
 ```mermaid
 flowchart TB
@@ -114,6 +116,46 @@ flowchart TB
     linkStyle 1 stroke:none
     linkStyle 2 stroke:none
 ```
+
+### テスト戦略
+
+```mermaid
+flowchart TB
+    subgraph TestWork[" "]
+        direction LR
+        T1[テスト設計]
+        T2[テスト実装]
+        T3[カバレッジ確認]
+    end
+
+    subgraph TestRules[" "]
+        direction TB
+        TR1[test-strategy]
+        space2[ ]
+        V5T[v5: コーディング基盤ルール]
+    end
+    
+    RLabelT[ルール<br/>.cursor/rules/*.mdc]
+
+    TestWork ~~~ TestRules
+    TestRules ~~~ RLabelT
+
+    T1 -->|参照| TR1
+    T2 -->|参照| TR1
+    T3 -->|参照| TR1
+    
+    TR1 -.->|準拠| V5T
+
+    style TestWork fill:#e8e8f4,stroke:#44a
+    style TestRules fill:#e8f4e8,stroke:#4a4
+    style RLabelT fill:none,stroke:none
+    style space2 fill:none,stroke:none
+    
+    linkStyle 0 stroke:none
+    linkStyle 1 stroke:none
+```
+
+> **注**: `test-strategy.mdc` は、テストコードの作成・更新時のみ適用されます。
 
 ## ベストプラクティスまとめ
 
