@@ -73,12 +73,7 @@
 
 ```mermaid
 flowchart TB
-
-
-
-    WLabel["ワークフロー
-
-    .cursor/commands/*.md"]
+    WLabel[ワークフロー<br/>.cursor/commands/*.md]
     
     subgraph Workflow[" "]
         direction LR
@@ -88,28 +83,32 @@ flowchart TB
     end
 
     subgraph Rules[" "]
-        direction LR
+        direction TB
         R1[commit-message-format]
         R2[pr-message-format]
+        space[ ]
+        V5[v5: コーディング基盤ルール]
     end
+    
+    RLabel[ルール<br/>.cursor/rules/*.mdc]
 
-    RLabel["ルール
-
-    .cursor/rules/*.mdc"]
-
-    WLabel --- Workflow
-    Workflow --> Rules
-    Rules --- RLabel
+    WLabel ~~~ Workflow
+    Workflow ~~~ Rules
+    Rules ~~~ RLabel
 
     W1 -->|参照| R1
     W2 -->|参照| R1
     W3 -->|参照| R1
     W3 -->|参照| R2
+    
+    R1 -.->|準拠| V5
+    R2 -.->|準拠| V5
 
     style Workflow fill:#e8e8f4,stroke:#44a
     style Rules fill:#e8f4e8,stroke:#4a4
     style WLabel fill:none,stroke:none
     style RLabel fill:none,stroke:none
+    style space fill:none,stroke:none
     
     linkStyle 0 stroke:none
     linkStyle 1 stroke:none
