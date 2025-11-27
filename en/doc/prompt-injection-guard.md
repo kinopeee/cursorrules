@@ -27,7 +27,7 @@ This document complements it by organizing **user-side operational options and h
 
 ### 2-1. Trusted sources
 
-- You may operate with certain domains or file paths treated as “trusted sources”.
+- You may operate with certain domains or file paths treated as "trusted sources".
 - Even for trusted sources, you may lower the UI warning level, but **must keep the defense behavior itself (detection / blocking) enabled**.
 
 ### 2-2. Alert suppression
@@ -37,7 +37,7 @@ This document complements it by organizing **user-side operational options and h
 
 ### 2-3. Exceptions for external source verification
 
-- You may treat specific API endpoints or file paths as “out of scope for external source verification”, but do this **only when you fully understand and accept the security risks**.
+- You may treat specific API endpoints or file paths as "out of scope for external source verification", but do this **only when you fully understand and accept the security risks**.
 - Even with such exceptions, you must **not allow automatic execution of destructive operations** such as deletion, external API calls, or system modifications.
 
 ---
@@ -51,7 +51,7 @@ This document complements it by organizing **user-side operational options and h
 
 ### 3-2. Learning mechanism (false-positive feedback)
 
-- When users judge that “this was a false positive”, you may record such patterns and adjust sensitivity for similar cases (assuming a local, controlled environment).
+- When users judge that "this was a false positive", you may record such patterns and adjust sensitivity for similar cases (assuming a local, controlled environment).
 - However, for patterns related to **critical operations (destructive changes, sensitive data exfiltration, etc.)**, always prioritize safety and avoid relaxing defenses lightly.
 
 ---
@@ -73,9 +73,9 @@ The strict guardrails the AI must follow are always defined by `.cursor/rules/pr
 
 ## 5. Common false-positive patterns and how to handle them
 
-- Example 1: **`instruction-quarantine` on internal wiki runbooks**  
-  - Symptom: A trusted internal wiki page contains phrases like “Run the following command”, and quoting it as-is triggers an alert.
-  - Handling: Treat the domain as a “trusted source” while **keeping the detection / blocking logic intact**.  
+- Example 1: **`instruction-quarantine` alerts on internal wiki runbooks**  
+  - Symptom: A trusted internal wiki page contains phrases like "Run the following command", and quoting it as-is triggers an alert.
+  - Handling: Treat the domain as a "trusted source" while **keeping the detection / blocking logic intact**.  
     If UI noise becomes a problem, consider temporarily suppressing the corresponding `alert_type` in the UI (logging only).
 
 - Example 2: **Repeated `payload-splitting` alerts from test scripts**  
