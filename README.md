@@ -22,7 +22,7 @@ This repository provides custom instructions and custom commands optimized for C
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/kinopee/cursorrules.git
+git clone https://github.com/kinopeee/cursorrules.git
 
 # 日本語版の設定をプロジェクトにコピー
 cp -r cursorrules/ja/.cursor ~/your-project/
@@ -34,7 +34,7 @@ cp -r cursorrules/ja/.cursor ~/your-project/
 
 ```bash
 # Clone the repository
-git clone https://github.com/kinopee/cursorrules.git
+git clone https://github.com/kinopeee/cursorrules.git
 
 # Copy English configuration to your project
 cp -r cursorrules/en/.cursor ~/your-project/
