@@ -70,7 +70,7 @@ See [en/README.md](en/README.md) for details.
 
 ### 🇯🇵 日本語
 
-- **GPT-5.1 最適化**: 適応的推論を活かした効率的なタスク実行
+- **GPT-5.1 & Opus 4.5 最適化**: 適応的推論を活かした効率的なタスク実行
 - **3段階タスク分類**: 軽量・標準・重要タスクに応じた最適なプロセス
 - **並列実行**: 独立したタスクを並列処理して処理速度を向上
 - **安全なツール利用**: read_file/apply_patch/run_terminal_cmd の明確なポリシー
@@ -78,7 +78,7 @@ See [en/README.md](en/README.md) for details.
 
 ### 🇬🇧 English
 
-- **GPT-5.1 Optimized**: Efficient task execution leveraging adaptive reasoning
+- **GPT-5.1 & Opus 4.5 Optimized**: Efficient task execution leveraging adaptive reasoning
 - **3-Tier Task Classification**: Optimal processes for lightweight/standard/critical tasks
 - **Parallel Execution**: Improved throughput by parallelizing independent tasks
 - **Safe Tool Usage**: Clear policies for read_file/apply_patch/run_terminal_cmd
