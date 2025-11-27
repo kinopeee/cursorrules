@@ -46,23 +46,29 @@ See [en/README.md](en/README.md) for details.
 
 ## 📋 What's Included / 含まれるもの
 
+All rule files and workflow commands are available in both Japanese and English.  
+すべてのルールファイルとワークフローコマンドに日本語版と英語版があります。
+
 ### ✅ Rule Files (`.cursor/rules/*.mdc`)
 
-| File | 日本語 | English |
-|------|--------|---------|
-| **v5.mdc** | GPT-5.1最適化のコーディング支援ルール | Coding support rules optimized for GPT-5.1 |
-| **commit-message-format.mdc** | コミットメッセージフォーマット規約 | Commit message format conventions |
-| **pr-message-format.mdc** | PRメッセージフォーマット規約 | PR message format conventions |
-| **test-strategy.mdc** | テスト戦略ルール（等価分割・境界値） | Test strategy rules (equivalence/boundary) |
-| **prompt-injection-guard.mdc** | 外部コンテキストインジェクション防御 | External context injection defense |
+- **v5.mdc** – Core coding support rules / コーディング支援ルール
+- **commit-message-format.mdc** – Commit message conventions / コミットメッセージ規約
+- **pr-message-format.mdc** – PR message conventions / PRメッセージ規約
+- **test-strategy.mdc** – Test strategy rules / テスト戦略ルール
+- **prompt-injection-guard.mdc** – Injection defense / インジェクション防御
 
 ### ⚙️ Workflow Commands (`.cursor/commands/*.md`)
 
-| Command | 日本語 | English |
-|---------|--------|---------|
-| **commit-only.md** | コミットのみ実行 | Execute commit only |
-| **commit-push.md** | コミット＆プッシュ | Commit and push |
-| **commit-push-pr.md** | コミット＆プッシュ＆PR作成 | Commit, push, and create PR |
+- **commit-only.md** – Commit only / コミットのみ
+- **commit-push.md** – Commit & push / コミット＆プッシュ
+- **commit-push-pr.md** – Commit, push & PR / コミット＆プッシュ＆PR
+
+> **📍 File Locations / ファイル配置**
+>
+> - **Repository**: `./ja/.cursor/` (日本語) / `./en/.cursor/` (English)
+> - **Your Project**: Copy to `.cursor/` in your project root
+>
+> For details, see [ja/README.md](ja/README.md) or [en/README.md](en/README.md).
 
 ---
 
