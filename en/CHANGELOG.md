@@ -5,6 +5,33 @@
 [🌏 Back to Top](../README.md) | [🇯🇵 日本語](../ja/CHANGELOG.md)
 
 This file records the update history of the cursorrules v5 project.
+## Version 4.3 (2025-11-29)
+
+### Highlights
+
+#### 1. Multi-language directory structure reorganization
+
+- Reorganized into language-specific directories (`ja/` and `en/`)
+- Unified documentation reference paths with language prefixes
+- Improved maintainability and clarity of multi-language support
+
+#### 2. Added external context injection defense feature
+
+- Added new `prompt-injection-guard.mdc` rule file
+- Added context-based detection and judgment criteria
+- Provides defense against instruction execution from external file references
+- Added operational guide documentation (`doc/prompt-injection-guard.md`)
+
+#### 3. Refreshed README
+
+- Renewed design with multi-language support
+- Added Quick Start section for easy onboarding
+- Simplified file list section for better readability
+
+#### 4. Added Opus 4.5 notation
+
+- Added references to Anthropic's Opus 4.5 model alongside GPT-5.1
+
 ## Version 4.2 (2025-11-17)
 
 ### Highlights
