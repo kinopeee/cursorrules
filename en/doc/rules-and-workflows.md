@@ -15,7 +15,7 @@ This document explains how to separate **rules (custom instructions)** and
   These are invoked explicitly as Cursor Commands (e.g. `/commit-only`, `/commit-push`).
   - Examples: commit-only, commit+push, commit+push+PR creation.
 
-## Core Principles
+## Basic Policy
 
 1. **Rules define “what” and “how to write it”**
    - Rules specify message formats (titles, summaries, sections), required fields, and forbidden patterns.
@@ -82,6 +82,94 @@ This document explains how to separate **rules (custom instructions)** and
     - Commit messages follow `commit-message-format.mdc`.
     - PR messages follow `pr-message-format.mdc`.
   - Shows examples using AI (MCP) and GitHub CLI, while keeping details project-agnostic.
+
+## Relationship between Rules and Workflows
+
+### Commit and PR Workflows
+
+```mermaid
+flowchart TB
+    WLabel[Workflows<br/>.cursor/commands/*.md]
+    
+    subgraph Workflow[" "]
+        direction LR
+        W1[commit-only]
+        W2[commit-push]
+        W3[commit-push-pr]
+    end
+
+    subgraph Rules[" "]
+        direction TB
+        R1[commit-message-format]
+        R2[pr-message-format]
+        space[ ]
+        V5[v5: Coding Foundation Rules]
+    end
+    
+    RLabel[Rules<br/>.cursor/rules/*.mdc]
+
+    WLabel ~~~ Workflow
+    Workflow ~~~ Rules
+    Rules ~~~ RLabel
+
+    W1 -->|refs| R1
+    W2 -->|refs| R1
+    W3 -->|refs| R1
+    W3 -->|refs| R2
+    
+    R1 -.->|complies| V5
+    R2 -.->|complies| V5
+
+    style Workflow fill:#e8e8f4,stroke:#44a
+    style Rules fill:#e8f4e8,stroke:#4a4
+    style WLabel fill:none,stroke:none
+    style RLabel fill:none,stroke:none
+    style space fill:none,stroke:none
+    
+    linkStyle 0 stroke:none
+    linkStyle 1 stroke:none
+    linkStyle 2 stroke:none
+```
+
+### Test Strategy
+
+```mermaid
+flowchart TB
+    subgraph TestWork[" "]
+        direction LR
+        T1[Test Design]
+        T2[Test Implementation]
+        T3[Coverage Verification]
+    end
+
+    subgraph TestRules[" "]
+        direction TB
+        TR1[test-strategy]
+        space2[ ]
+        V5T[v5: Coding Foundation Rules]
+    end
+    
+    RLabelT[Rules<br/>.cursor/rules/*.mdc]
+
+    TestWork ~~~ TestRules
+    TestRules ~~~ RLabelT
+
+    T1 -->|refs| TR1
+    T2 -->|refs| TR1
+    T3 -->|refs| TR1
+    
+    TR1 -.->|complies| V5T
+
+    style TestWork fill:#e8e8f4,stroke:#44a
+    style TestRules fill:#e8f4e8,stroke:#4a4
+    style RLabelT fill:none,stroke:none
+    style space2 fill:none,stroke:none
+    
+    linkStyle 0 stroke:none
+    linkStyle 1 stroke:none
+```
+
+> **Note**: `test-strategy.mdc` is only applied when creating or updating test code.
 
 ## Best Practices Summary
 

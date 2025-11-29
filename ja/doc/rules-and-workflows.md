@@ -69,6 +69,94 @@
   - コミットメッセージは `commit-message-format.mdc`、PR メッセージは `pr-message-format.mdc` に従うことを前提に、  
     AI（MCP）や GitHub CLI (`gh`) を使った PR 作成フローの例を示す。
 
+## ルールとワークフローの関係
+
+### コミット・PRワークフロー
+
+```mermaid
+flowchart TB
+    WLabel[ワークフロー<br/>.cursor/commands/*.md]
+    
+    subgraph Workflow[" "]
+        direction LR
+        W1[commit-only]
+        W2[commit-push]
+        W3[commit-push-pr]
+    end
+
+    subgraph Rules[" "]
+        direction TB
+        R1[commit-message-format]
+        R2[pr-message-format]
+        space[ ]
+        V5[v5: コーディング基盤ルール]
+    end
+    
+    RLabel[ルール<br/>.cursor/rules/*.mdc]
+
+    WLabel ~~~ Workflow
+    Workflow ~~~ Rules
+    Rules ~~~ RLabel
+
+    W1 -->|参照| R1
+    W2 -->|参照| R1
+    W3 -->|参照| R1
+    W3 -->|参照| R2
+    
+    R1 -.->|準拠| V5
+    R2 -.->|準拠| V5
+
+    style Workflow fill:#e8e8f4,stroke:#44a
+    style Rules fill:#e8f4e8,stroke:#4a4
+    style WLabel fill:none,stroke:none
+    style RLabel fill:none,stroke:none
+    style space fill:none,stroke:none
+    
+    linkStyle 0 stroke:none
+    linkStyle 1 stroke:none
+    linkStyle 2 stroke:none
+```
+
+### テスト戦略
+
+```mermaid
+flowchart TB
+    subgraph TestWork[" "]
+        direction LR
+        T1[テスト設計]
+        T2[テスト実装]
+        T3[カバレッジ確認]
+    end
+
+    subgraph TestRules[" "]
+        direction TB
+        TR1[test-strategy]
+        space2[ ]
+        V5T[v5: コーディング基盤ルール]
+    end
+    
+    RLabelT[ルール<br/>.cursor/rules/*.mdc]
+
+    TestWork ~~~ TestRules
+    TestRules ~~~ RLabelT
+
+    T1 -->|参照| TR1
+    T2 -->|参照| TR1
+    T3 -->|参照| TR1
+    
+    TR1 -.->|準拠| V5T
+
+    style TestWork fill:#e8e8f4,stroke:#44a
+    style TestRules fill:#e8f4e8,stroke:#4a4
+    style RLabelT fill:none,stroke:none
+    style space2 fill:none,stroke:none
+    
+    linkStyle 0 stroke:none
+    linkStyle 1 stroke:none
+```
+
+> **注**: `test-strategy.mdc` は、テストコードの作成・更新時のみ適用されます。
+
 ## ベストプラクティスまとめ
 
 - **ルールファイル (.mdc)** には:
@@ -84,5 +172,6 @@
     他プロジェクトでは `language` や Prefix 一覧などを差し替え可能な設計にする。
   - ワークフローは、特定技術スタック（Node / npm / 特定リポジトリ名など）への依存を避け、  
     必要な部分だけコメントとして「例」を示す程度にとどめる。
+    
 
 
