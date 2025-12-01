@@ -4,7 +4,34 @@
 
 [🌏 Back to Top](../README.md) | [🇯🇵 日本語](../ja/CHANGELOG.md)
 
-This file records the update history of the cursorrules v5 project.
+This file records the update history of the Windsurf / Antigravity Rules v5 project.
+
+> **Note**: This repository is a port of [cursorrules](https://github.com/kinopeee/cursorrules) for Windsurf and Antigravity.
+
+## Version 4.4 (2025-12-02)
+
+### Highlights
+
+#### 1. Windsurf / Antigravity Support
+
+- Ported from [cursorrules](https://github.com/kinopeee/cursorrules) for Windsurf / Antigravity
+- Added Windsurf rules (`.windsurf/rules/`) and workflows (`.windsurf/workflows/`)
+- Added Antigravity rules (`.agent/rules/`) and workflows (`.agent/workflows/`)
+- Added Antigravity-specific `planning-mode-guard.md` rule
+
+#### 2. Documentation Generalization
+
+- Updated Cursor-specific paths (`.cursor/rules/*.mdc`) for Windsurf / Antigravity
+- Changed file extensions from `.mdc` to `.md`
+- Changed `alwaysApply: true` to `trigger: always_on`
+- Replaced Cursor-specific tool names (`read_file`, `apply_patch`, `run_terminal_cmd`) with generic expressions
+
+#### 3. README Updates
+
+- Completely revised root README for Windsurf / Antigravity
+- Added links to related repository (cursorrules)
+- Separated Quick Start section by Windsurf / Antigravity
+
 ## Version 4.3 (2025-11-29)
 
 ### Highlights
@@ -146,20 +173,35 @@ This file records the update history of the cursorrules v5 project.
 - Clarified that the assistant should not modify command files
 - Ensured only explicitly provided arguments are passed to slash commands, leaving other parameters to command defaults
 
-## Version 2 (2024-03-02)
+## Version 2 (2025-03-01)
 
 ### Highlights
 
-#### 1. Project Rules support
+#### 1. Enhanced Control for Claude 3.7 Sonnet
 
-- Fully compatible with the Project Rules format introduced in Cursor 0.45
-- Migration from the legacy `.cursorrules` format to Project Rules
-- Manage rules within the `.cursor/rules` directory
+- Prevented Claude 3.7 Sonnet from performing operations not explicitly instructed
+- Optimized to execute only actions that follow explicit instructions
 
-#### 2. Optimized for Claude 3.7 Sonnet
+#### 2. File Operation Efficiency
 
-- Prompt design to maximize the capabilities of Claude 3.7 Sonnet
+- Reduced unnecessary segmentation of file read/write operations
+- Improved ability to comprehend larger contexts in a single operation
 
-## Previous versions
+#### 3. Optimization for Claude 3.7 Sonnet
 
-For older updates, please refer to the repository history.
+- Adjusted instruction formats to leverage Claude 3.7 Sonnet's capabilities
+- Enhanced efficiency in dialogue and processing
+
+### Detailed Changes
+
+- Improved file reading to process larger sections at once
+- Reduced chains of unnecessary tool calls for more efficient processing flows
+- Optimized instruction formats to maximize Claude 3.7 Sonnet's understanding and reasoning abilities
+- Strengthened controls to prevent additional processing without explicit instructions
+
+## Version 1 (Initial Release)
+
+- Initial version of custom instructions (`.windsurfrules`) for Windsurf
+- Optimized adaptation of [cursorrules](https://github.com/kinopeee/cursorrules) for Windsurf Cascade
+- Included descriptions of basic tech stacks, API version management, and project structures
+- Provided two configuration types: v1 (simplified version) and v5 (customizable version)

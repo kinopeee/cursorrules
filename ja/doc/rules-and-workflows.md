@@ -6,10 +6,14 @@
 ## 用語
 
 - **ルール（Rules）**:  
-  `.cursor/rules/*.mdc` に配置する、モデルが常に参照する「振る舞い・フォーマット」の規約。
+  モデルが常に参照する「振る舞い・フォーマット」の規約。
+  - **Windsurf**: `.windsurf/rules/*.md`
+  - **Antigravity**: `.agent/rules/*.md`
   - 例: コミットメッセージ規約、PR メッセージ規約、テスト戦略ルールなど。
 - **ワークフロー（Workflows）**:  
-  `.cursor/commands/*.md` に配置する、よく使う Git 操作や開発フローをまとめたコマンドテンプレート。
+  よく使う Git 操作や開発フローをまとめたコマンドテンプレート。
+  - **Windsurf**: `.windsurf/workflows/*.md`
+  - **Antigravity**: `.agent/workflows/*.md`
   - 例: コミットのみ、コミット＆プッシュ、コミット＆プッシュ＆PR 作成など。
 
 ## 基本方針
@@ -17,16 +21,16 @@
 1. **ルールは「何を・どう書くか」を定義する**  
    - メッセージフォーマット、必須セクション、禁止事項などをルール側で定義します。
    - 例:  
-     - `commit-message-format.mdc` / `commit-message-format.en.mdc`: コミットメッセージの Prefix / サマリ / 箇条書き本文の書き方を定義。  
-     - `pr-message-format.mdc` / `pr-message-format.en.mdc`: PR タイトル / 本文の構造（概要 / 変更内容 / テスト内容など）を定義。
-     - `test-strategy.mdc` / `test-strategy.en.mdc`: テスト観点表、Given/When/Then コメント、カバレッジ方針などを定義。
+     - `commit-message-format.md`: コミットメッセージの Prefix / サマリ / 箇条書き本文の書き方を定義。  
+     - `pr-message-format.md`: PR タイトル / 本文の構造（概要 / 変更内容 / テスト内容など）を定義。
+     - `test-strategy.md`: テスト観点表、Given/When/Then コメント、カバレッジ方針などを定義。
 
 2. **ワークフローは「どう実行するか」だけを書く**  
    - 実際に使う Git コマンドや、lint/test/build の呼び出し例をワークフロー側にまとめます。
    - ただし、メッセージやテストの「中身（書き方）」には踏み込まず、**ルールファイルへの参照**にとどめます。
    - 例:  
      - `commit-only.md`: コミットだけを行う手順（`git add -A` → `git commit -m "$MSG"`）と、  
-       メッセージの中身は `commit-message-format.mdc` に従うことを明記。  
+       メッセージの中身は `commit-message-format.md` に従うことを明記。  
      - `commit-push.md`: ブランチチェック + 任意の品質チェック + `git push` までの流れを定義。  
      - `commit-push-pr.md`: コミット & プッシュ後に AI や `gh` コマンドで PR を作成するまでのテンプレート。
 
@@ -37,19 +41,19 @@
 
 ## ルールファイルの例
 
-- `commit-message-format.mdc` / `commit-message-format.en.mdc`
+- `commit-message-format.md`
   - コミットメッセージの基本フォーマット（Prefix + サマリ + 箇条書き本文）
   - 言語指定（`language = "ja"`）と、それに従うサマリ/本文の書き方
   - 未コミット差分に基づいてメッセージを生成すること
   - 曖昧なサマリや、意味のない変更のみのコミットの禁止
 
-- `pr-message-format.mdc` / `pr-message-format.en.mdc`
+- `pr-message-format.md`
   - PR タイトル（`<Prefix>: <サマリ>`）の書き方
   - 本文の構造（概要 / 変更内容 / 技術的な詳細 / テスト内容 / 関連 Issue）
   - 実際の差分・コミット履歴・Issue を入力にしたメッセージ生成の原則
   - 非構造な長文や曖昧なタイトルの禁止
 
-- `test-strategy.mdc` / `test-strategy.en.mdc`
+- `test-strategy.md`
   - テスト観点表（等価分割・境界値）の作成
   - Given / When / Then コメントの必須化
   - 例外・エラー検証、カバレッジ取得方法のルール化
@@ -58,7 +62,7 @@
 
 - `commit-only.md`
   - ローカル変更をコミットだけ行う最小限のフロー。
-  - コミットメッセージの中身は `commit-message-format.mdc` を参照。
+  - コミットメッセージの中身は `commit-message-format.md` を参照。
 
 - `commit-push.md`
   - 現在のブランチでコミット → リモートへプッシュするためのテンプレート。
@@ -66,7 +70,7 @@
 
 - `commit-push-pr.md`
   - コミット → プッシュ後に PR を作成するためのテンプレート。
-  - コミットメッセージは `commit-message-format.mdc`、PR メッセージは `pr-message-format.mdc` に従うことを前提に、  
+  - コミットメッセージは `commit-message-format.md`、PR メッセージは `pr-message-format.md` に従うことを前提に、  
     AI（MCP）や GitHub CLI (`gh`) を使った PR 作成フローの例を示す。
 
 ## ルールとワークフローの関係
@@ -75,7 +79,7 @@
 
 ```mermaid
 flowchart TB
-    WLabel[ワークフロー<br/>.cursor/commands/*.md]
+    WLabel[ワークフロー<br/>workflows/*.md]
     
     subgraph Workflow[" "]
         direction LR
@@ -92,7 +96,7 @@ flowchart TB
         V5[v5: コーディング基盤ルール]
     end
     
-    RLabel[ルール<br/>.cursor/rules/*.mdc]
+    RLabel[ルール<br/>rules/*.md]
 
     WLabel ~~~ Workflow
     Workflow ~~~ Rules
@@ -135,7 +139,7 @@ flowchart TB
         V5T[v5: コーディング基盤ルール]
     end
     
-    RLabelT[ルール<br/>.cursor/rules/*.mdc]
+    RLabelT[ルール<br/>rules/*.md]
 
     TestWork ~~~ TestRules
     TestRules ~~~ RLabelT
@@ -155,11 +159,11 @@ flowchart TB
     linkStyle 1 stroke:none
 ```
 
-> **注**: `test-strategy.mdc` は、テストコードの作成・更新時のみ適用されます。
+> **注**: `test-strategy.md` は、テストコードの作成・更新時のみ適用されます。
 
 ## ベストプラクティスまとめ
 
-- **ルールファイル (.mdc)** には:
+- **ルールファイル (.md)** には:
   - メッセージやテストの「フォーマット」「必須項目」「禁止事項」を書く。
   - プロジェクトとして守りたい「品質ゲート」を明文化する。
 

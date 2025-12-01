@@ -105,7 +105,10 @@
 
 ---
 
-This design document summarizes the threat analysis and design principles behind the implementation rules in `.cursor/rules/prompt-injection-guard.mdc`.  
-For the actual defense rules applied at runtime, see the MDC files under the `.cursor/rules/` folder.
+This design document summarizes the threat analysis and design principles behind the implementation rules in `prompt-injection-guard.md`.  
+For the actual defense rules applied at runtime, see the following folders:
+
+- **Windsurf**: `.windsurf/rules/prompt-injection-guard.md`
+- **Antigravity**: `.agent/rules/prompt-injection-guard.md`
 
 

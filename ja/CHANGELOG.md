@@ -4,7 +4,34 @@
 
 [🌏 トップページに戻る](../README.md) | [🇬🇧 English](../en/CHANGELOG.md)
 
-このファイルでは、cursorrules v5 プロジェクトの更新履歴を記録しています。
+このファイルでは、Windsurf / Antigravity Rules v5 プロジェクトの更新履歴を記録しています。
+
+> **Note**: このリポジトリは [cursorrules](https://github.com/kinopeee/cursorrules) を Windsurf および Antigravity 用に移植したものです。
+
+## バージョン4.4 (2025-12-02)
+
+### 主な変更点
+
+#### 1. Windsurf / Antigravity 対応
+
+- [cursorrules](https://github.com/kinopeee/cursorrules) から Windsurf / Antigravity 用に移植
+- Windsurf 用ルール（`.windsurf/rules/`）とワークフロー（`.windsurf/workflows/`）を追加
+- Antigravity 用ルール（`.agent/rules/`）とワークフロー（`.agent/workflows/`）を追加
+- Antigravity 固有の `planning-mode-guard.md` ルールを追加
+
+#### 2. ドキュメントの汎用化
+
+- Cursor 固有のパス（`.cursor/rules/*.mdc`）を Windsurf / Antigravity 用に更新
+- ファイル拡張子を `.mdc` から `.md` に変更
+- `alwaysApply: true` を `trigger: always_on` に変更
+- Cursor 固有のツール名（`read_file`、`apply_patch`、`run_terminal_cmd`）を汎用的な表現に変更
+
+#### 3. README の更新
+
+- ルート README を Windsurf / Antigravity 用に全面改訂
+- 関連リポジトリ（cursorrules）へのリンクを追加
+- Quick Start セクションを Windsurf / Antigravity 別に分離
+
 ## バージョン4.3 (2025-11-29)
 
 ### 主な変更点
@@ -146,20 +173,35 @@
 - AI アシスタントがコマンドファイルを修正・生成しないことを明示
 - 明示的に指定された引数のみを渡し、それ以外はコマンド側の既定値に委ねる運用を定義
 
-## バージョン2 (2024-03-02)
+## バージョン2 (2025-03-01)
 
 ### 主な変更点
 
-#### 1. Project Rules 対応
+#### 1. Claude 3.7 Sonnet の制御強化
 
-- Cursor 0.45 で導入された Project Rules 形式に完全対応
-- 従来の `.cursorrules` 形式から Project Rules 形式への移行
-- `.cursor/rules` ディレクトリ内でのルール管理に対応
+- Claude 3.7 Sonnet が明示的に指示されていない操作を行わないように制御
+- 明示的な指示に従うアクションのみを実行するよう最適化
 
-#### 2. Claude 3.7 Sonnet 最適化
+#### 2. ファイル操作の効率化
 
-- Claude 3.7 Sonnet の能力を最大限に引き出すためのプロンプト設計
+- ファイル読み書き操作の不要な分割を削減
+- 単一操作でより大きなコンテキストを理解する能力を向上
 
-## 過去のバージョン
+#### 3. Claude 3.7 Sonnet 最適化
 
-過去のバージョンの更新履歴については、リポジトリの履歴を参照してください。    
+- Claude 3.7 Sonnet の能力を活かす指示形式に調整
+- 対話と処理の効率を向上
+
+### 詳細な変更
+
+- ファイル読み取りを改善し、より大きなセクションを一度に処理
+- 不要なツール呼び出しのチェーンを削減し、より効率的な処理フローを実現
+- Claude 3.7 Sonnet の理解力と推論能力を最大化する指示形式に最適化
+- 明示的な指示なしに追加処理を行わないよう制御を強化
+
+## バージョン1 (初期リリース)
+
+- Windsurf 用カスタムインストラクション（`.windsurfrules`）の初期バージョン
+- [cursorrules](https://github.com/kinopeee/cursorrules) を Windsurf Cascade 用に最適化して移植
+- 基本的な技術スタック、API バージョン管理、プロジェクト構成の記述を含む
+- v1（簡易版）と v5（カスタマイズ版）の2つの構成タイプを提供

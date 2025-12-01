@@ -6,13 +6,17 @@ This document explains how to separate **rules (custom instructions)** and
 ## Terminology
 
 - **Rules**  
-  Files under `.cursor/rules/*.mdc` that define how the model should behave or format outputs.  
-  These are always loaded as part of the Cursor agent's context.
+  Files that define how the model should behave or format outputs.  
+  These are always loaded as part of the agent's context.
+  - **Windsurf**: `.windsurf/rules/*.md`
+  - **Antigravity**: `.agent/rules/*.md`
   - Examples: commit message rules, PR message rules, test strategy rules.
 
 - **Workflows**  
-  Files under `.cursor/commands/*.md` that define frequently used Git operations or development flows.  
-  These are invoked explicitly as Cursor Commands (e.g. `/commit-only`, `/commit-push`).
+  Files that define frequently used Git operations or development flows.  
+  These are invoked explicitly as commands (e.g. `/commit-only`, `/commit-push`).
+  - **Windsurf**: `.windsurf/workflows/*.md`
+  - **Antigravity**: `.agent/workflows/*.md`
   - Examples: commit-only, commit+push, commit+push+PR creation.
 
 ## Basic Policy
@@ -20,12 +24,12 @@ This document explains how to separate **rules (custom instructions)** and
 1. **Rules define “what” and “how to write it”**
    - Rules specify message formats (titles, summaries, sections), required fields, and forbidden patterns.
    - Examples:
-     - `commit-message-format.mdc` / `commit-message-format.en.mdc`: Defines the format for commit messages  
+     - `commit-message-format.md`: Defines the format for commit messages  
        (Prefix + summary + bullet-list body), language selection (`language`),  
        and the requirement to base messages on the actual diff.
-     - `pr-message-format.mdc` / `pr-message-format.en.mdc`: Defines the structure of PR titles and bodies  
+     - `pr-message-format.md`: Defines the structure of PR titles and bodies  
        (Overview / Changes / Technical details / Tests / Related issues).
-     - `test-strategy.mdc` / `test-strategy.en.mdc`: Defines how to design tests (equivalence classes, boundary values,  
+     - `test-strategy.md`: Defines how to design tests (equivalence classes, boundary values,  
        Given/When/Then comments, coverage goals, etc.).
 
 2. **Workflows define “how to execute safely”**
@@ -34,7 +38,7 @@ This document explains how to separate **rules (custom instructions)** and
    - They **do not** restate the detailed rules; instead they point to rule files.
    - Examples:
      - `commit-only.md`: Minimal flow to commit local changes  
-       (`git add -A` → `git commit -m "$MSG"`), assuming `MSG` follows `commit-message-format.mdc`.
+       (`git add -A` → `git commit -m "$MSG"`), assuming `MSG` follows `commit-message-format.md`.
      - `commit-push.md`: Template for commit + push, including branch checks and optional quality checks.
      - `commit-push-pr.md`: Template for commit + push + PR creation using AI (MCP) or `gh pr create`,
        assuming commit and PR messages follow their respective rule files.
@@ -49,19 +53,19 @@ This document explains how to separate **rules (custom instructions)** and
 
 ## Examples of Rule Files
 
-- `commit-message-format.mdc` / `commit-message-format.en.mdc`
+- `commit-message-format.md`
   - Basic format: `<Prefix>: <summary>` + bullet-list body.
   - Language selection via `language` (e.g. `language = "ja"`).
   - Messages must be based on the actual diff (`git diff` / `git diff --cached`).
   - Prohibits vague summaries and commits that only weaken checks without real improvement.
 
-- `pr-message-format.mdc` / `pr-message-format.en.mdc`
+- `pr-message-format.md`
   - PR title format: `<Prefix>: <summary>`.
   - Body structure with sections like Overview, Changes, Technical details, Tests, Related issues.
   - Requires using diffs, commit history, and issue information as inputs to generate messages.
   - Forbids unstructured long walls of text and vague titles.
 
-- `test-strategy.mdc` / `test-strategy.en.mdc`
+- `test-strategy.md`
   - Requires a test perspective table (equivalence and boundary cases).
   - Requires Given/When/Then comments in tests.
   - Defines how to handle exceptions, errors, and coverage targets.
@@ -70,7 +74,7 @@ This document explains how to separate **rules (custom instructions)** and
 
 - `commit-only.md`
   - Minimal flow: confirm diff → `git add -A` → `git commit -m "$MSG"`.
-  - Explicitly states that the **content** of `MSG` must follow `commit-message-format.mdc`.
+  - Explicitly states that the **content** of `MSG` must follow `commit-message-format.md`.
 
 - `commit-push.md`
   - Flow: branch check → optional quality checks (lint/test/build) → commit → push.
@@ -79,8 +83,8 @@ This document explains how to separate **rules (custom instructions)** and
 - `commit-push-pr.md`
   - Flow: branch check → optional quality checks → commit → push → PR creation.
   - Assumes:
-    - Commit messages follow `commit-message-format.mdc`.
-    - PR messages follow `pr-message-format.mdc`.
+    - Commit messages follow `commit-message-format.md`.
+    - PR messages follow `pr-message-format.md`.
   - Shows examples using AI (MCP) and GitHub CLI, while keeping details project-agnostic.
 
 ## Relationship between Rules and Workflows
@@ -89,7 +93,7 @@ This document explains how to separate **rules (custom instructions)** and
 
 ```mermaid
 flowchart TB
-    WLabel[Workflows<br/>.cursor/commands/*.md]
+    WLabel[Workflows<br/>workflows/*.md]
     
     subgraph Workflow[" "]
         direction LR
@@ -106,7 +110,7 @@ flowchart TB
         V5[v5: Coding Foundation Rules]
     end
     
-    RLabel[Rules<br/>.cursor/rules/*.mdc]
+    RLabel[Rules<br/>rules/*.md]
 
     WLabel ~~~ Workflow
     Workflow ~~~ Rules
@@ -149,7 +153,7 @@ flowchart TB
         V5T[v5: Coding Foundation Rules]
     end
     
-    RLabelT[Rules<br/>.cursor/rules/*.mdc]
+    RLabelT[Rules<br/>rules/*.md]
 
     TestWork ~~~ TestRules
     TestRules ~~~ RLabelT
@@ -169,11 +173,11 @@ flowchart TB
     linkStyle 1 stroke:none
 ```
 
-> **Note**: `test-strategy.mdc` is only applied when creating or updating test code.
+> **Note**: `test-strategy.md` is only applied when creating or updating test code.
 
 ## Best Practices Summary
 
-- **Rule files (.mdc)**:
+- **Rule files (.md)**:
   - Define formats, required sections, and forbidden patterns.
   - Capture the “quality gates” the project wants to enforce.
 

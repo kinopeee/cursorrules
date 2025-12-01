@@ -1,13 +1,23 @@
-# cursorrules "v5"
+# Windsurf / Antigravity Rules "v5"
 
 🇬🇧 **English** | 🇯🇵 **日本語**
 
 ---
 
-## 🌏 Select Your Language / 言語を選択
+## 🌏 About This Repository / このリポジトリについて
 
-This repository provides custom instructions and custom commands optimized for Cursor.  
-このリポジトリは、Cursor 用に最適化されたカスタムインストラクションやカスタムコマンドを提供します。
+This repository provides custom instructions optimized for **Windsurf** and **Antigravity**.  
+It is a port of [cursorrules](https://github.com/kinopeee/cursorrules) adapted for Windsurf Cascade and Antigravity.
+
+このリポジトリは、**Windsurf** および **Antigravity** 用に最適化されたカスタムインストラクションを提供します。  
+別リポジトリで公開している [cursorrules](https://github.com/kinopeee/cursorrules) を Windsurf Cascade および Antigravity に移植したものです。
+
+### 📂 Related Repositories / 関連リポジトリ
+
+| Editor | Repository |
+|--------|------------|
+| **Cursor** | [kinopeee/cursorrules](https://github.com/kinopeee/cursorrules) |
+| **Windsurf / Antigravity** | This repository / このリポジトリ |
 
 ### 📂 Language-specific Documentation
 
@@ -18,29 +28,29 @@ This repository provides custom instructions and custom commands optimized for C
 
 ## ⚡ Quick Start
 
-### For Japanese Users (日本語ユーザー向け)
+### For Windsurf Users
 
 ```bash
-# リポジトリをクローン
-git clone https://github.com/kinopeee/cursorrules.git
+# Clone the repository / リポジトリをクローン
+git clone https://github.com/kinopeee/windsurf-antigravity-rules.git
 
-# 日本語版の設定をプロジェクトにコピー
-cp -r cursorrules/ja/.cursor ~/your-project/
+# Copy to your project / プロジェクトにコピー
+cp -r windsurf-antigravity-rules/ja/.windsurf ~/your-project/   # 日本語
+cp -r windsurf-antigravity-rules/en/.windsurf ~/your-project/   # English
 ```
 
-詳細は [ja/README.md](ja/README.md) をご覧ください。
-
-### For English Users
+### For Antigravity Users
 
 ```bash
-# Clone the repository
-git clone https://github.com/kinopeee/cursorrules.git
+# Clone the repository / リポジトリをクローン
+git clone https://github.com/kinopeee/windsurf-antigravity-rules.git
 
-# Copy English configuration to your project
-cp -r cursorrules/en/.cursor ~/your-project/
+# Copy to your project / プロジェクトにコピー
+cp -r windsurf-antigravity-rules/ja/.agent ~/your-project/   # 日本語
+cp -r windsurf-antigravity-rules/en/.agent ~/your-project/   # English
 ```
 
-See [en/README.md](en/README.md) for details.
+See [ja/README.md](ja/README.md) or [en/README.md](en/README.md) for details.
 
 ---
 
@@ -49,24 +59,30 @@ See [en/README.md](en/README.md) for details.
 All rule files and workflow commands are available in both Japanese and English.  
 すべてのルールファイルとワークフローコマンドに日本語版と英語版があります。
 
-### ✅ Rule Files (`.cursor/rules/*.mdc`)
+### ✅ Rule Files / ルールファイル
 
-- **v5.mdc** – Core coding support rules / コーディング支援ルール
-- **commit-message-format.mdc** – Commit message conventions / コミットメッセージ規約
-- **pr-message-format.mdc** – PR message conventions / PRメッセージ規約
-- **test-strategy.mdc** – Test strategy rules / テスト戦略ルール
-- **prompt-injection-guard.mdc** – Injection defense / インジェクション防御
+| File | Description |
+|------|-------------|
+| **v5.md** | Core coding support rules / コーディング支援ルール |
+| **commit-message-format.md** | Commit message conventions / コミットメッセージ規約 |
+| **pr-message-format.md** | PR message conventions / PRメッセージ規約 |
+| **test-strategy.md** | Test strategy rules / テスト戦略ルール |
+| **prompt-injection-guard.md** | Injection defense / インジェクション防御 |
 
-### ⚙️ Workflow Commands (`.cursor/commands/*.md`)
+### ⚙️ Workflow Commands / ワークフロー
 
-- **commit-only.md** – Commit only / コミットのみ
-- **commit-push.md** – Commit & push / コミット＆プッシュ
-- **commit-push-pr.md** – Commit, push & PR / コミット＆プッシュ＆PR
+| File | Description |
+|------|-------------|
+| **commit-only.md** | Commit only / コミットのみ |
+| **commit-push.md** | Commit & push / コミット＆プッシュ |
+| **commit-push-pr.md** | Commit, push & PR / コミット＆プッシュ＆PR |
 
 > **📍 File Locations / ファイル配置**
 >
-> - **Repository**: `./ja/.cursor/` (日本語) / `./en/.cursor/` (English)
-> - **Your Project**: Copy to `.cursor/` in your project root
+> | Editor | Rules | Workflows |
+> |--------|-------|-----------|
+> | **Windsurf** | `.windsurf/rules/` | `.windsurf/workflows/` |
+> | **Antigravity** | `.agent/rules/` | `.agent/workflows/` |
 >
 > For details, see [ja/README.md](ja/README.md) or [en/README.md](en/README.md).
 
@@ -79,7 +95,7 @@ All rule files and workflow commands are available in both Japanese and English.
 - **GPT-5.1 & Opus 4.5 最適化**: 適応的推論を活かした効率的なタスク実行
 - **3段階タスク分類**: 軽量・標準・重要タスクに応じた最適なプロセス
 - **並列実行**: 独立したタスクを並列処理して処理速度を向上
-- **安全なツール利用**: read_file/apply_patch/run_terminal_cmd の明確なポリシー
+- **安全なツール利用**: ファイル読み取り・編集・コマンド実行の明確なポリシー
 - **包括的なガードレール**: コミット規約、PR規約、テスト戦略、セキュリティ防御
 
 ### 🇬🇧 English
@@ -87,7 +103,7 @@ All rule files and workflow commands are available in both Japanese and English.
 - **GPT-5.1 & Opus 4.5 Optimized**: Efficient task execution leveraging adaptive reasoning
 - **3-Tier Task Classification**: Optimal processes for lightweight/standard/critical tasks
 - **Parallel Execution**: Improved throughput by parallelizing independent tasks
-- **Safe Tool Usage**: Clear policies for read_file/apply_patch/run_terminal_cmd
+- **Safe Tool Usage**: Clear policies for file reading, editing, and command execution
 - **Comprehensive Guardrails**: Commit conventions, PR conventions, test strategy, security defense
 
 ---
@@ -122,13 +138,13 @@ MITライセンス - 詳細は [LICENSE](LICENSE) を参照してください。
 ### 🇯🇵 日本語
 
 このリポジトリに公式サポートはありませんが、フィードバックは歓迎します。  
-Cursor関連情報を X (Twitter) で発信しています: [@kinopee_ai](https://x.com/kinopee_ai)
+AI関連情報を X (Twitter) で発信しています: [@kinopee_ai](https://x.com/kinopee_ai)
 
 ### 🇬🇧 English
 
 There is no official support for this repository, but feedback is welcome.  
-Follow on X (Twitter) for Cursor-related updates: [@kinopee_ai](https://x.com/kinopee_ai)
+Follow on X (Twitter) for AI-related updates: [@kinopee_ai](https://x.com/kinopee_ai)
 
 ---
 
-## Made with ❤️ for Cursor IDE users worldwide
+## Made with ❤️ for Windsurf & Antigravity users worldwide
