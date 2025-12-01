@@ -1,6 +1,6 @@
 ---
-trigger: always_on
-description: Gitコミットメッセージの書式ルール（Prefix + サマリ + 箇条書き）
+trigger: model_decision
+description: Gitコミットメッセージ作成時に適用。Conventional Commits ベースの Prefix + 日本語サマリ + 箇条書き本文の書式ルール
 globs:
 ---
 

@@ -1,6 +1,6 @@
 ---
-trigger: always_on
-description:
+trigger: model_decision
+description: テストコード実装・変更時に適用。テスト観点表（等価分割・境界値）の作成、Given/When/Then形式、カバレッジ目標のルール
 globs:
 ---
 
