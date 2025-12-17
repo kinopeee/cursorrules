@@ -37,7 +37,7 @@ This repository manages custom instructions for Cursor.
 - Because their application condition is "always", they will be referenced in subsequent chats as long as they exist at the designated path.
 - Both Japanese and English versions are set to `alwaysApply: true`, so you may want to adjust this setting based on your preferred language and whether you want the test rules enabled by default.
 
-For the division of responsibilities and usage patterns between rule files (`.cursor/rules/*/RULE.md`) and workflow commands (`.cursor/commands/*.md`), see [doc/rules-and-workflows.md](doc/rules-and-workflows.md).
+For the division of responsibilities and usage patterns between rule files (`.cursor/rules/*/RULE.md`) and workflow commands (`.cursor/commands/*.md`), see [en/doc/rules-and-workflows.md](../en/doc/rules-and-workflows.md).
 
 ### Guardrail-related files
 
@@ -57,9 +57,9 @@ For the division of responsibilities and usage patterns between rule files (`.cu
   - **Role**: Defines defense rules against **context injection attacks from external sources (RAG, web, files, API responses, etc.)**.
   - **Contents**: Describes guardrails such as restrictions on executing commands originating from external data, the Instruction Quarantine mechanism, the `SECURITY_ALERT` format, and detection of user impersonation attempts.
   - **Characteristics**: Does not restrict the user's own direct instructions; only malicious commands injected via external sources are neutralized.
-  - **Note**: This file has `alwaysApply: true` set in its metadata, but users can still control when these rules are applied via Cursor's UI settings (Always Apply / Apply Intelligently / Apply Manually). See the [operational guide](doc/prompt-injection-guard.md) for details on handling false positives.
+  - **Note**: This file has `alwaysApply: true` set in its metadata, but users can still control when these rules are applied via Cursor's UI settings (Always Apply / Apply Intelligently / Apply Manually). See the [operational guide](../en/doc/prompt-injection-guard.md) for details on handling false positives.
 
-- `doc/custom_instruction_plan_prompt_injection.md`  
+- [en/doc/custom_instruction_plan_prompt_injection.md](../en/doc/custom_instruction_plan_prompt_injection.md)  
   - **Role**: Design and threat analysis document for external context injection defense.
   - **Contents**: Organizes attack categories (A-01–A-09) via external sources, corresponding defense requirements (R-01–R-08), design principles for the external data control layer, and validation/operations planning.
   - **Update**: Fully revised in November 2024 to focus on external-source attacks.

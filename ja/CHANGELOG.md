@@ -20,7 +20,7 @@
 
 - README（ルート/ja/en）のルール参照を新形式に更新
 - ワークフローコマンド（`.cursor/commands/*.md`）内の参照パスを更新
-- 運用ガイド（`doc/rules-and-workflows.md`, `doc/prompt-injection-guard.md`）の参照を更新
+- 運用ガイド（`ja/doc/rules-and-workflows.md`, `ja/doc/prompt-injection-guard.md`）の参照を更新
 - 翻訳ガイド（`TRANSLATION_GUIDE.md`）のファイル形式説明を更新
 
 #### 3. 対象ルールファイル
@@ -58,7 +58,7 @@
 - 新規ルールファイル `prompt-injection-guard.mdc` を追加
 - コンテキストベース検出と判定基準を追加
 - 外部ファイル参照時の実行指示に対する防御を提供
-- 運用ガイドドキュメント（`doc/prompt-injection-guard.md`）を追加
+- 運用ガイドドキュメント（`ja/doc/prompt-injection-guard.md`）を追加
 
 #### 3. README の刷新
 
@@ -82,7 +82,7 @@
 #### 2. ルールとカスタムコマンドの分離およびドキュメント追加
 
 - ルール定義とカスタムコマンド定義を分離し、それぞれを整理
-- ルールとカスタムコマンドのベストプラクティスを説明するドキュメント（doc/rules-and-workflows.md）を追加
+- ルールとカスタムコマンドのベストプラクティスを説明するドキュメント（ja/doc/rules-and-workflows.md）を追加
 
 ## バージョン4.1 (2025-11-15)
 

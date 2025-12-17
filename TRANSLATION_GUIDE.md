@@ -7,7 +7,7 @@ Provide a practical template to translate custom instructions into other languag
 - Source to translate: `./en/.cursor/rules/v5/RULE.md` (English version of cursor custom instructions in this repo)
 - This guide provides a template to translate it into any target language while preserving functionality
 - The source file includes task classification, error-handling tiers, and slash command conventions; translations must preserve their operational meaning.
-- Placement of translated output: in your target project, place the translated folder under `.cursor/rules/` (e.g., `.cursor/rules/v5/RULE.md`)
+- Placement of translated output: in your target project, place the translated rules at `.cursor/rules/v5/RULE.md` (i.e., the `v5/` folder containing `RULE.md`)
 
 ## Recommended Prompt Template
 

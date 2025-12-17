@@ -38,7 +38,7 @@
 - 日本語版・英語版の両方で `alwaysApply: true` が設定されているため、利用したい言語やテストルールをデフォルトで有効にするかどうかに応じて、この設定を調整してください。
 - これらを有効にすると、テストコードの実装・修正タスクでは、本リポジトリで定義した等価分割・境界値分析やカバレッジ要件などのテスト方針ルールが自動的に適用されます。
 
-ルールファイル（`.cursor/rules/*/RULE.md`）とワークフローコマンド（`.cursor/commands/*.md`）の役割分担と使い方については、[doc/rules-and-workflows.md](doc/rules-and-workflows.md) を参照してください。
+ルールファイル（`.cursor/rules/*/RULE.md`）とワークフローコマンド（`.cursor/commands/*.md`）の役割分担と使い方については、[ja/doc/rules-and-workflows.md](../ja/doc/rules-and-workflows.md) を参照してください。
 
 ### ガードレール関連ファイル
 
@@ -58,9 +58,9 @@
   - **役割**: **外部ソース（RAG、Web、ファイル、API応答等）からのコンテキストインジェクション攻撃** に対する防御ルールを定義するファイルです。
   - **内容**: 外部データ由来の命令制限、Instruction Quarantine、SECURITY_ALERT のフォーマット、ユーザー偽装検出など、外部からの攻撃を防ぎつつユーザーの正当な操作は妨げないガードレールを記述しています。
   - **特徴**: ユーザー自身の操作は制限せず、外部から注入された悪意ある命令のみを無効化します。
-  - **注意**: このファイルのメタデータには `alwaysApply: true` が設定されていますが、Cursor の UI 設定（Always Apply / Apply Intelligently / Apply Manually）でルールの適用タイミングを制御できます。誤検知への対処方法については[運用ガイド](doc/prompt-injection-guard.md)を参照してください。
+  - **注意**: このファイルのメタデータには `alwaysApply: true` が設定されていますが、Cursor の UI 設定（Always Apply / Apply Intelligently / Apply Manually）でルールの適用タイミングを制御できます。誤検知への対処方法については[運用ガイド](../ja/doc/prompt-injection-guard.md)を参照してください。
 
-- `doc/custom_instruction_plan_prompt_injection.md`  
+- [ja/doc/custom_instruction_plan_prompt_injection.md](../ja/doc/custom_instruction_plan_prompt_injection.md)  
   - **役割**: 外部コンテキストインジェクション防御のための **設計・脅威分析ドキュメント**です。
   - **内容**: 外部ソース経由の攻撃カテゴリ（A-01〜A-09）、それに対応する防御要件（R-01〜R-08）、外部データ制御層の設計方針、検証・運用計画などを整理しています。
   - **更新**: 2024年11月に外部ソース攻撃に特化した内容に全面改訂されました。

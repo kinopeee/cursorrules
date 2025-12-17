@@ -20,7 +20,7 @@ This file records the update history of the cursorrules v5 project.
 
 - Updated rule references in README (root/ja/en) to new format
 - Updated reference paths in workflow commands (`.cursor/commands/*.md`)
-- Updated references in operational guides (`doc/rules-and-workflows.md`, `doc/prompt-injection-guard.md`)
+- Updated references in operational guides (`en/doc/rules-and-workflows.md`, `en/doc/prompt-injection-guard.md`)
 - Updated file format descriptions in translation guide (`TRANSLATION_GUIDE.md`)
 
 #### 3. Migrated rule files
@@ -58,7 +58,7 @@ The following rules have been migrated to the new format:
 - Added new `prompt-injection-guard.mdc` rule file
 - Added context-based detection and judgment criteria
 - Provides defense against instruction execution from external file references
-- Added operational guide documentation (`doc/prompt-injection-guard.md`)
+- Added operational guide documentation (`en/doc/prompt-injection-guard.md`)
 
 #### 3. Refreshed README
 
@@ -82,7 +82,7 @@ The following rules have been migrated to the new format:
 #### 2. Separated rules and workflows and added documentation
 
 - Separated rule definitions and workflow (custom command) definitions and organized them
-- Added documentation explaining best practices for rules and workflows (doc/rules-and-workflows.md)
+- Added documentation explaining best practices for rules and workflows (en/doc/rules-and-workflows.md)
 
 ## Version 4.1 (2025-11-15)
 
