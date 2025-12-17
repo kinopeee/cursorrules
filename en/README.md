@@ -31,8 +31,8 @@ This repository manages custom instructions for Cursor.
 1. If `.cursor/rules` does not exist yet, create the folder.
 2. If the path exists, copy the language you prefer—`en/.cursor/rules/v5/` (English) or `ja/.cursor/rules/v5/` (Japanese)—into that folder.
 3. To enable the test strategy rules, copy `ja/.cursor/rules/test-strategy/` (Japanese) and/or `en/.cursor/rules/test-strategy/` (English) into the same `.cursor/rules` folder.
-4. To enable the commit message format rules, copy `ja/.cursor/rules/commit-message-format/` (Japanese) and/or `en/.cursor/rules/commit-message-format/` (English) into the same folder.
-5. To enable the PR message format rules, copy `ja/.cursor/rules/pr-message-format/` (Japanese) and/or `en/.cursor/rules/pr-message-format/` (English) into the same folder.
+4. Similarly, copy `ja/.cursor/rules/commit-message-format/` (Japanese) and/or `en/.cursor/rules/commit-message-format/` (English) to enable the commit message format rules.
+5. For PR message format rules, copy `ja/.cursor/rules/pr-message-format/` (Japanese) and/or `en/.cursor/rules/pr-message-format/` (English) into the same folder.
 - Because their application condition is "always", they will be referenced in subsequent chats as long as they exist at the designated path.
 - Both Japanese and English versions are set to `alwaysApply: true`, so you may want to adjust this setting based on your preferred language and whether you want the test rules enabled by default.
 
