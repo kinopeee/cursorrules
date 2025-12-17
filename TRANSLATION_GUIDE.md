@@ -4,10 +4,10 @@
 Provide a practical template to translate custom instructions into other languages so that models can understand and comply with them, while producing natural, idiomatic target-language text.
 
 ## Scope
-- Source to translate: `./.cursor/rules/v5/RULE.md` (English version of cursor custom instructions)
+- Source to translate: `./en/.cursor/rules/v5/RULE.md` (English version of cursor custom instructions in this repo)
 - This guide provides a template to translate it into any target language while preserving functionality
 - The source file includes task classification, error-handling tiers, and slash command conventions; translations must preserve their operational meaning.
-- Placement of translated output: place the translated folder in `./.cursor/rules/` (adjust folder name as needed, e.g., `v5/RULE.md`)
+- Placement of translated output: in your target project, place the translated folder under `.cursor/rules/` (e.g., `.cursor/rules/v5/RULE.md`)
 
 ## Recommended Prompt Template
 
@@ -40,7 +40,7 @@ Input:
   - Brand names
   - Issue/PR numbers
   - Commit prefixes
-- Original text: paste the full content of `./.cursor/rules/v5/RULE.md` between triple backticks:
+- Original text: paste the full content of `./en/.cursor/rules/v5/RULE.md` between triple backticks:
 
 ```
 [PASTE v5/RULE.md CONTENT HERE]
@@ -80,7 +80,7 @@ Output format:
 1. **Before translating**: Read through `v5/RULE.md` to understand its structure and technical requirements
 2. **Target language**: Specify any target language and regional variant (e.g., Spanish (ES), German (DE), Portuguese (BR))
 3. **Glossary**: Build a consistent terminology mapping for technical terms used throughout the instructions
-4. **Testing**: After translation, verify the translated instructions work correctly in Cursor by placing them in `./.cursor/rules/`
+4. **Testing**: After translation, verify the translated instructions work correctly in Cursor by placing them in `.cursor/rules/`
 
 
 

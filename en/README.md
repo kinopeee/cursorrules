@@ -10,6 +10,7 @@ This repository manages custom instructions for Cursor.
 
 - This `v5` is a set of custom instructions optimized for the Cursor Agent.
 - For the Cursor Agent to operate autonomously (without human intervention), Auto-Run must be configured appropriately.
+- Additionally, it is recommended to set `agent->plan` in **Auto-Approved Mode Transitions** under Cursor Settings > Agents. This enables the agent to automatically switch to plan mode for critical tasks (🔴), presenting a plan before proceeding with implementation.
 - See the [changelog](CHANGELOG.md) for the latest updates.
 
 ## Overview
@@ -20,7 +21,7 @@ This repository manages custom instructions for Cursor.
     1. We create a checklist-style execution plan first, then verify completion item-by-item for a more disciplined process.
     1. Tasks are classified into Lightweight, Standard, and Critical levels, with simplified reporting for lightweight tasks and more thorough processes for heavier ones.
     1. Independent tasks are executed in parallel to improve throughput.
-- In addition, this version codifies detailed tooling policies (e.g., always read files before editing, rely on `apply_patch` for modifications, and run terminal commands only when necessary with safe flags) so the Cursor Agent executes tasks with consistent safeguards.
+- In addition, this version codifies detailed tooling policies (e.g., always read relevant files before editing, prefer applying diffs for modifications, and run shell commands only when necessary with safe flags) so the Cursor Agent executes tasks with consistent safeguards.
 - `v5` was initially created with Anthropic Prompt Generator and has since gone through cycles of evaluation by contemporary models and practical improvements. When customizing, we recommend having your chosen AI evaluate it as well.
 - For detailed updates, including task classification, error handling tiers, and tooling policies, see [CHANGELOG.md](CHANGELOG.md).
 
