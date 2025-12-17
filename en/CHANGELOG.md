@@ -35,6 +35,14 @@ The following rules have been migrated to the new format:
 | `test-strategy.mdc` | `test-strategy/RULE.md` |
 | `prompt-injection-guard.mdc` | `prompt-injection-guard/RULE.md` |
 
+#### 4. v5 coding support rule improvements
+
+- **Standalone usage**: Removed dependency on workspace common rules, enabling independent use
+- **Abstracted tool names**: Changed from specific tool names (`read_file`, `apply_patch`, etc.) to abstract operation types (`read/search`, `apply diff`), making the rule applicable across different environments
+- **Clarified task judgment**: Added "when in doubt, treat as 🟡 standard task"
+- **Simplified rule priority**: Explicitly stated the principle of "prioritize more specific/restrictive clauses" in case of conflicts
+- **Improved section structure**: Changed from "Task classification and reasoning depth" to "Task classification and standard flow", integrating execution flows
+
 ## Version 4.3 (2025-11-29)
 
 ### Highlights
