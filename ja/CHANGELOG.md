@@ -5,6 +5,36 @@
 [🌏 トップページに戻る](../README.md) | [🇬🇧 English](../en/CHANGELOG.md)
 
 このファイルでは、cursorrules v5 プロジェクトの更新履歴を記録しています。
+
+## バージョン4.4 (2025-12-17)
+
+### 主な変更点
+
+#### 1. ルールファイル形式の移行（Cursor 2.2+ 対応）
+
+- `.mdc` 形式から新しいフォルダ形式（`ルール名/RULE.md`）に移行
+- Cursor 2.2 以降の推奨形式に準拠し、ルールの可読性と保守性を向上
+- 各ルールをフォルダとして管理し、将来的なスクリプトやリソースの追加に対応
+
+#### 2. ドキュメントとコマンドの参照パス更新
+
+- README（ルート/ja/en）のルール参照を新形式に更新
+- ワークフローコマンド（`.cursor/commands/*.md`）内の参照パスを更新
+- 運用ガイド（`doc/rules-and-workflows.md`, `doc/prompt-injection-guard.md`）の参照を更新
+- 翻訳ガイド（`TRANSLATION_GUIDE.md`）のファイル形式説明を更新
+
+#### 3. 対象ルールファイル
+
+以下のルールが新形式に移行されました：
+
+| 旧形式 | 新形式 |
+|--------|--------|
+| `v5.mdc` | `v5/RULE.md` |
+| `commit-message-format.mdc` | `commit-message-format/RULE.md` |
+| `pr-message-format.mdc` | `pr-message-format/RULE.md` |
+| `test-strategy.mdc` | `test-strategy/RULE.md` |
+| `prompt-injection-guard.mdc` | `prompt-injection-guard/RULE.md` |
+
 ## バージョン4.3 (2025-11-29)
 
 ### 主な変更点

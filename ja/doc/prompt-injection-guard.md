@@ -4,12 +4,12 @@ title: Prompt Injection Guard 運用ガイド
 
 ## 概要
 
-`.cursor/rules/prompt-injection-guard.mdc` は、AI が即時に守るべき **防御ロジック本体** を定義するファイルです。  
+`.cursor/rules/prompt-injection-guard/RULE.md` は、AI が即時に守るべき **防御ロジック本体** を定義するファイルです。  
 本ドキュメントはその補助として、**ユーザー側の運用オプションや誤検知時の扱い** を整理します。
 
 **関連ドキュメント:**
 - 脅威分析と設計背景: [`custom_instruction_plan_prompt_injection.md`](custom_instruction_plan_prompt_injection.md)
-- 実装ルール: [`.cursor/rules/prompt-injection-guard.mdc`](../../.cursor/rules/prompt-injection-guard.mdc)
+- 実装ルール: [`.cursor/rules/prompt-injection-guard/RULE.md`](../.cursor/rules/prompt-injection-guard/RULE.md)
 
 ---
 
@@ -18,7 +18,7 @@ title: Prompt Injection Guard 運用ガイド
 - このルールは **厳格モード相当を常時適用** し、すべての検出機能を有効にしている。
 - INFO / WARN / CRITICAL のレベルは、**検出結果の重要度をユーザーに通知するためのラベルにのみ使用し、防御ロジック（検出・遮断の有無）を切り替える用途には使用しない**。
 - カスタムインストラクション側にはセキュリティレベルを切り替える仕組みはなく、誤検知によって作業に支障が出る場合は、**Cursor 側のルール適用設定（例: Always Apply / Apply Intelligently / Apply Manually）を変更して、一時的に適用範囲やタイミングを調整する**。
-- **`alwaysApply: true` についての注記**: ルールファイル `.cursor/rules/prompt-injection-guard.mdc` のメタデータには `alwaysApply: true` が設定されており、Cursor がデフォルトでこのルールを参照します。ただし、ユーザーは Cursor の UI 設定（Always Apply / Apply Intelligently / Apply Manually）でルールの実際の適用タイミングを制御できます。`alwaysApply: true` の設定は、Cursor のインターフェースを通じたルール適用タイミングの制御を妨げるものではありません。
+- **`alwaysApply: true` についての注記**: ルールファイル `.cursor/rules/prompt-injection-guard/RULE.md` のメタデータには `alwaysApply: true` が設定されており、Cursor がデフォルトでこのルールを参照します。ただし、ユーザーは Cursor の UI 設定（Always Apply / Apply Intelligently / Apply Manually）でルールの実際の適用タイミングを制御できます。`alwaysApply: true` の設定は、Cursor のインターフェースを通じたルール適用タイミングの制御を妨げるものではありません。
 
 ---
 
@@ -57,7 +57,7 @@ title: Prompt Injection Guard 運用ガイド
 
 ## 4. 実務上の推奨
 
-- 通常運用では `.cursor/rules/prompt-injection-guard.mdc` を **Always Apply** とし、常時ガードを有効にする。
+- 通常運用では `.cursor/rules/prompt-injection-guard/RULE.md` を **Always Apply** とし、常時ガードを有効にする。
 - 誤検知が多く作業が進まない場合でも、
   - まずは **信頼済みソースの整理** や **アラート非表示設定** などでノイズ低減を検討する。
   - それでも支障が大きい場合に限り、一時的に **Apply Intelligently / Apply Manually** へ切り替え、作業完了後に必ず設定を戻す。
@@ -65,7 +65,7 @@ title: Prompt Injection Guard 運用ガイド
 - 英語 UI など多言語環境で利用する場合も同じガードロジックが適用される。ワークスペースに英語版のルール／ガイドが用意されている場合は、必要に応じてそちらも併せて参照する。
 
 このガイドは、防御ロジックそのものではなく「どう運用するか」に関するものであり、  
-AI が従うべき厳格なガードレールは `.cursor/rules/prompt-injection-guard.mdc` の内容を常に優先とする。
+AI が従うべき厳格なガードレールは `.cursor/rules/prompt-injection-guard/RULE.md` の内容を常に優先とする。
 
 ---
 

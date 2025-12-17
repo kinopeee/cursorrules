@@ -9,7 +9,7 @@ This rule defines guidelines for Pull Request (PR) titles and bodies.
 
 ## Role of this rule
 
-- This rule defines the PR message format in a way that is consistent with the commit message convention (`commit-message-format.mdc`) based on Conventional Commits.
+- This rule defines the PR message format in a way that is consistent with the commit message convention (`commit-message-format/RULE.md`) based on Conventional Commits.
 - The `Prefix` and summary style are aligned with commit messages, while the PR body is required to be structured into sections such as "Overview", "Changes", and "Tests".
 - When reusing this rule in other projects, adjust `language` and required sections (e.g. “Technical details”) according to your project’s policy.
 
@@ -72,7 +72,7 @@ Short summary of what this PR implements or fixes.
 - PR titles and bodies must always be based on the **actual diff and commit history** (e.g. by using `git diff`, `git log`).
 - Do not rely solely on issue titles or branch names; explicitly describe the changes, impact, and tests in the body.
 - When AI or scripts generate PR messages, they should use diffs, commit history, and related issue information as input.
-- Choose Prefix and summaries in a way that is consistent with the commit message rules (`commit-message-format.mdc`) to avoid semantic mismatch between commits and PRs.
+- Choose Prefix and summaries in a way that is consistent with the commit message rules (`commit-message-format/RULE.md`) to avoid semantic mismatch between commits and PRs.
 
 ## Prohibited patterns
 

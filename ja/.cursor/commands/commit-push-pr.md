@@ -160,12 +160,12 @@ git log origin/main..HEAD --oneline
 
 ## PRタイトルとメッセージのルール
 
-- PR タイトルや本文の詳細なフォーマットは、`.cursor/rules/pr-message-format.mdc` のルールに従ってください。
+- PR タイトルや本文の詳細なフォーマットは、`.cursor/rules/pr-message-format/RULE.md` のルールに従ってください。
 - 本コマンドは、そのルールで定義された構造化フォーマット（概要／変更内容／テスト内容など）で PR メッセージを記述することを前提としています。
 
 ## 注意事項
 
-- コミットメッセージのフォーマットやメッセージ生成の原則は、`.cursor/rules/commit-message-format.mdc` の規約に従ってください。
+- コミットメッセージのフォーマットやメッセージ生成の原則は、`.cursor/rules/commit-message-format/RULE.md` の規約に従ってください。
 - `git status` や `git diff` で差分を確認してからの実行を推奨します。
 
 ## トラブルシューティング
@@ -216,6 +216,6 @@ git add -A && git commit -m "$MSG" && git push -u origin "$BRANCH"
 
 ## 関連ドキュメント
 
-- コミットメッセージルール: `.cursor/rules/commit-message-format.mdc`
-- PR メッセージルール（任意）: `.cursor/rules/pr-message-format.mdc`
+- コミットメッセージルール: `.cursor/rules/commit-message-format/RULE.md`
+- PR メッセージルール（任意）: `.cursor/rules/pr-message-format/RULE.md`
 - 開発フロー: プロジェクト固有の README / CONTRIBUTING / 開発ガイド等

@@ -29,30 +29,30 @@ This repository manages custom instructions for Cursor.
 ## Usage
 
 1. If `.cursor/rules` does not exist yet, create the folder.
-2. If the path exists, copy the language you prefer—`en/.cursor/rules/v5.mdc` (English) or `ja/.cursor/rules/v5.mdc` (Japanese)—into that folder (typically as `v5.mdc`).
-3. To enable the test strategy rules, copy `ja/.cursor/rules/test-strategy.mdc` (Japanese) and/or `en/.cursor/rules/test-strategy.mdc` (English) into the same `.cursor/rules` folder.
-4. To enable the commit message format rules, copy `ja/.cursor/rules/commit-message-format.mdc` (Japanese) and/or `en/.cursor/rules/commit-message-format.mdc` (English) into the same folder.
-5. To enable the PR message format rules, copy `ja/.cursor/rules/pr-message-format.mdc` (Japanese) and/or `en/.cursor/rules/pr-message-format.mdc` (English) into the same folder.
+2. If the path exists, copy the language you prefer—`en/.cursor/rules/v5/` (English) or `ja/.cursor/rules/v5/` (Japanese)—into that folder.
+3. To enable the test strategy rules, copy `ja/.cursor/rules/test-strategy/` (Japanese) and/or `en/.cursor/rules/test-strategy/` (English) into the same `.cursor/rules` folder.
+4. To enable the commit message format rules, copy `ja/.cursor/rules/commit-message-format/` (Japanese) and/or `en/.cursor/rules/commit-message-format/` (English) into the same folder.
+5. To enable the PR message format rules, copy `ja/.cursor/rules/pr-message-format/` (Japanese) and/or `en/.cursor/rules/pr-message-format/` (English) into the same folder.
 - Because their application condition is "always", they will be referenced in subsequent chats as long as they exist at the designated path.
 - Both Japanese and English versions are set to `alwaysApply: true`, so you may want to adjust this setting based on your preferred language and whether you want the test rules enabled by default.
 
-For the division of responsibilities and usage patterns between rule files (`.cursor/rules/*.mdc`) and workflow commands (`.cursor/commands/*.md`), see [doc/rules-and-workflows.md](doc/rules-and-workflows.md).
+For the division of responsibilities and usage patterns between rule files (`.cursor/rules/*/RULE.md`) and workflow commands (`.cursor/commands/*.md`), see [doc/rules-and-workflows.md](doc/rules-and-workflows.md).
 
 ### Guardrail-related files
 
-- `ja/.cursor/rules/commit-message-format.mdc` / `en/.cursor/rules/commit-message-format.mdc`  
+- `ja/.cursor/rules/commit-message-format/` / `en/.cursor/rules/commit-message-format/`  
   - **Role**: Defines the commit message format (prefix, summary, bullet-list body) and prohibited patterns.
   - **Characteristics**: Based on Conventional Commits, with additional guidelines such as `language`-based language selection and diff-based message generation tailored for this repository.
 
-- `ja/.cursor/rules/pr-message-format.mdc` / `en/.cursor/rules/pr-message-format.mdc`  
+- `ja/.cursor/rules/pr-message-format/` / `en/.cursor/rules/pr-message-format/`  
   - **Role**: Defines the format for PR titles and bodies (prefix-style titles and structured sections such as Overview, Changes, Tests) and prohibited patterns.
   - **Characteristics**: Aligns PR messages with the commit message conventions and encourages structured descriptions that facilitate review and understanding of change intent.
 
-- `ja/.cursor/rules/test-strategy.mdc` / `en/.cursor/rules/test-strategy.mdc`  
+- `ja/.cursor/rules/test-strategy/` / `en/.cursor/rules/test-strategy/`  
   - **Role**: Defines test strategy rules for test implementation and maintenance, including equivalence partitioning, boundary value analysis, and coverage requirements.
   - **Purpose**: Serves as a quality guardrail by requiring corresponding automated tests whenever meaningful changes are made to production code, where reasonably feasible.
 
-- `ja/.cursor/rules/prompt-injection-guard.mdc` / `en/.cursor/rules/prompt-injection-guard.mdc`  
+- `ja/.cursor/rules/prompt-injection-guard/` / `en/.cursor/rules/prompt-injection-guard/`  
   - **Role**: Defines defense rules against **context injection attacks from external sources (RAG, web, files, API responses, etc.)**.
   - **Contents**: Describes guardrails such as restrictions on executing commands originating from external data, the Instruction Quarantine mechanism, the `SECURITY_ALERT` format, and detection of user impersonation attempts.
   - **Characteristics**: Does not restrict the user's own direct instructions; only malicious commands injected via external sources are neutralized.

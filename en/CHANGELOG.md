@@ -5,6 +5,36 @@
 [🌏 Back to Top](../README.md) | [🇯🇵 日本語](../ja/CHANGELOG.md)
 
 This file records the update history of the cursorrules v5 project.
+
+## Version 4.4 (2025-12-17)
+
+### Highlights
+
+#### 1. Rule file format migration (Cursor 2.2+ compatible)
+
+- Migrated from `.mdc` format to new folder-based format (`rule-name/RULE.md`)
+- Aligned with Cursor 2.2+ recommended format for improved readability and maintainability
+- Each rule is now managed as a folder, enabling future addition of scripts and resources
+
+#### 2. Updated document and command reference paths
+
+- Updated rule references in README (root/ja/en) to new format
+- Updated reference paths in workflow commands (`.cursor/commands/*.md`)
+- Updated references in operational guides (`doc/rules-and-workflows.md`, `doc/prompt-injection-guard.md`)
+- Updated file format descriptions in translation guide (`TRANSLATION_GUIDE.md`)
+
+#### 3. Migrated rule files
+
+The following rules have been migrated to the new format:
+
+| Old format | New format |
+|------------|------------|
+| `v5.mdc` | `v5/RULE.md` |
+| `commit-message-format.mdc` | `commit-message-format/RULE.md` |
+| `pr-message-format.mdc` | `pr-message-format/RULE.md` |
+| `test-strategy.mdc` | `test-strategy/RULE.md` |
+| `prompt-injection-guard.mdc` | `prompt-injection-guard/RULE.md` |
+
 ## Version 4.3 (2025-11-29)
 
 ### Highlights
