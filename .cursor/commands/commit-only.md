@@ -8,7 +8,7 @@
 ## 前提条件
 
 - 変更済みファイルが存在すること
-- コミットメッセージの具体的な書き方は、`.cursor/rules/commit-message-format.mdc` などで定義された規約に従うこと
+- コミットメッセージの具体的な書き方は、`.cursor/rules/commit-message-format/RULE.md` などで定義された規約に従うこと
 
 ## 実行手順（対話なし）
 
@@ -48,7 +48,7 @@ git commit -m "<Prefix>: <サマリ（命令形/簡潔に）>"
 
 ## ノート
 
-- コミットメッセージのフォーマットやメッセージ生成の原則は、`.cursor/rules/commit-message-format.mdc` のルールに従ってください。
+- コミットメッセージのフォーマットやメッセージ生成の原則は、`.cursor/rules/commit-message-format/RULE.md` のルールに従ってください。
 - ブランチ戦略（例：main 直コミット禁止、作業用ブランチ運用）やリモートへのプッシュ (`git push`) は、このコマンドの対象外です。必要に応じて、プロジェクトごとの README / CONTRIBUTING / 別コマンドで定義してください。
 
 

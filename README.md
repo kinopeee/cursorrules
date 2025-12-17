@@ -49,13 +49,13 @@ See [en/README.md](en/README.md) for details.
 All rule files and workflow commands are available in both Japanese and English.  
 すべてのルールファイルとワークフローコマンドに日本語版と英語版があります。
 
-### ✅ Rule Files (`.cursor/rules/*.mdc`)
+### ✅ Rule Files (`.cursor/rules/*/RULE.md`)
 
-- **v5.mdc** – Core coding support rules / コーディング支援ルール
-- **commit-message-format.mdc** – Commit message conventions / コミットメッセージ規約
-- **pr-message-format.mdc** – PR message conventions / PRメッセージ規約
-- **test-strategy.mdc** – Test strategy rules / テスト戦略ルール
-- **prompt-injection-guard.mdc** – Injection defense / インジェクション防御
+- **v5/** – Core coding support rules / コーディング支援ルール
+- **commit-message-format/** – Commit message conventions / コミットメッセージ規約
+- **pr-message-format/** – PR message conventions / PRメッセージ規約
+- **test-strategy/** – Test strategy rules / テスト戦略ルール
+- **prompt-injection-guard/** – Injection defense / インジェクション防御
 
 ### ⚙️ Workflow Commands (`.cursor/commands/*.md`)
 

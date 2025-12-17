@@ -4,10 +4,10 @@
 Provide a practical template to translate custom instructions into other languages so that models can understand and comply with them, while producing natural, idiomatic target-language text.
 
 ## Scope
-- Source to translate: `./.cursor/rules/v5.en.mdc` (English version of cursor custom instructions)
+- Source to translate: `./en/.cursor/rules/v5/RULE.md` (English version of cursor custom instructions in this repo)
 - This guide provides a template to translate it into any target language while preserving functionality
 - The source file includes task classification, error-handling tiers, and slash command conventions; translations must preserve their operational meaning.
-- Placement of translated output: place the translated file in `./.cursor/rules/` (adjust file name as needed, e.g., `v5.ja.mdc`)
+- Placement of translated output: in your target project, place the translated rules at `.cursor/rules/v5/RULE.md` (i.e., the `v5/` folder containing `RULE.md`)
 
 ## Recommended Prompt Template
 
@@ -20,7 +20,7 @@ Goal:
   2) The text feels natural and idiomatic in the target language, while strictly preserving the original intent, constraints, structure, and enforceability
 
 Input:
-- Source language: English (for v5.en.mdc)
+- Source language: English (for v5/RULE.md)
 - Target language: Specify your target language and regional variant (e.g., Spanish (ES), German (DE), Portuguese (BR))
 - Formality/Tone: FORMAL (prefer clarity and imperative voice for rules)
 - Style guidance: none
@@ -40,10 +40,10 @@ Input:
   - Brand names
   - Issue/PR numbers
   - Commit prefixes
-- Original text: paste the full content of `./.cursor/rules/v5.en.mdc` between triple backticks:
+- Original text: paste the full content of `./en/.cursor/rules/v5/RULE.md` between triple backticks:
 
 ```
-[PASTE v5.en.mdc CONTENT HERE]
+[PASTE v5/RULE.md CONTENT HERE]
 ```
 
 Strict requirements:
@@ -53,7 +53,7 @@ Strict requirements:
   - Whitespace and indentation, including front matter and code blocks (do not change width or style)
   - Variables/placeholders (e.g., {{var}}, {var}), anchors, and link targets (localize only visible anchor text if needed)
   - Commit message prefixes, command flags, config keys, and file paths
-  - Structural markers and metadata specific to `v5.en.mdc` (e.g., front matter separators `---`, keys like `alwaysApply:`, or tags)
+  - Structural markers and metadata specific to `v5/RULE.md` (e.g., front matter separators `---`, keys like `alwaysApply:`, or tags)
   - Also preserve/do not translate: special markers (BREAKING CHANGE/Refs/Closes), file paths and extensions, and technical identifiers (API/function/config names)
 - Optimize for target-language clarity:
   - Use imperative forms for rules/guidelines where natural
@@ -77,15 +77,15 @@ Output format:
 
 ## Usage Tips
 
-1. **Before translating**: Read through `v5.en.mdc` to understand its structure and technical requirements
+1. **Before translating**: Read through `v5/RULE.md` to understand its structure and technical requirements
 2. **Target language**: Specify any target language and regional variant (e.g., Spanish (ES), German (DE), Portuguese (BR))
 3. **Glossary**: Build a consistent terminology mapping for technical terms used throughout the instructions
-4. **Testing**: After translation, verify the translated instructions work correctly in Cursor by placing them in `./.cursor/rules/`
+4. **Testing**: After translation, verify the translated instructions work correctly in Cursor by placing them in `.cursor/rules/`
 
 
 
 ### Key Items to Preserve
 - Commit prefixes: `feat:`, `fix:`, `docs:`, `chore:`, etc.
 - Special markers: `BREAKING CHANGE`, `Refs:`, `Closes:`
-- File paths and extensions: `.mdc`, `.cursor/rules/`
+- File paths and extensions: `RULE.md`, `.cursor/rules/`
 - Technical identifiers: API names, function names, configuration keys

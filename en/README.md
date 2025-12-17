@@ -10,6 +10,7 @@ This repository manages custom instructions for Cursor.
 
 - This `v5` is a set of custom instructions optimized for the Cursor Agent.
 - For the Cursor Agent to operate autonomously (without human intervention), Auto-Run must be configured appropriately.
+- Additionally, it is recommended to set `agent->plan` in **Auto-Approved Mode Transitions** under Cursor Settings > Agents. This enables the agent to automatically switch to plan mode for critical tasks (🔴), presenting a plan before proceeding with implementation.
 - See the [changelog](CHANGELOG.md) for the latest updates.
 
 ## Overview
@@ -20,7 +21,7 @@ This repository manages custom instructions for Cursor.
     1. We create a checklist-style execution plan first, then verify completion item-by-item for a more disciplined process.
     1. Tasks are classified into Lightweight, Standard, and Critical levels, with simplified reporting for lightweight tasks and more thorough processes for heavier ones.
     1. Independent tasks are executed in parallel to improve throughput.
-- In addition, this version codifies detailed tooling policies (e.g., always read files before editing, rely on `apply_patch` for modifications, and run terminal commands only when necessary with safe flags) so the Cursor Agent executes tasks with consistent safeguards.
+- In addition, this version codifies detailed tooling policies (e.g., always read relevant files before editing, prefer applying diffs for modifications, and run shell commands only when necessary with safe flags) so the Cursor Agent executes tasks with consistent safeguards.
 - `v5` was initially created with Anthropic Prompt Generator and has since gone through cycles of evaluation by contemporary models and practical improvements. When customizing, we recommend having your chosen AI evaluate it as well.
 - For detailed updates, including task classification, error handling tiers, and tooling policies, see [CHANGELOG.md](CHANGELOG.md).
 
@@ -29,36 +30,36 @@ This repository manages custom instructions for Cursor.
 ## Usage
 
 1. If `.cursor/rules` does not exist yet, create the folder.
-2. If the path exists, copy the language you prefer—`en/.cursor/rules/v5.mdc` (English) or `ja/.cursor/rules/v5.mdc` (Japanese)—into that folder (typically as `v5.mdc`).
-3. To enable the test strategy rules, copy `ja/.cursor/rules/test-strategy.mdc` (Japanese) and/or `en/.cursor/rules/test-strategy.mdc` (English) into the same `.cursor/rules` folder.
-4. To enable the commit message format rules, copy `ja/.cursor/rules/commit-message-format.mdc` (Japanese) and/or `en/.cursor/rules/commit-message-format.mdc` (English) into the same folder.
-5. To enable the PR message format rules, copy `ja/.cursor/rules/pr-message-format.mdc` (Japanese) and/or `en/.cursor/rules/pr-message-format.mdc` (English) into the same folder.
+2. If the path exists, copy the language you prefer—`en/.cursor/rules/v5/` (English) or `ja/.cursor/rules/v5/` (Japanese)—into that folder.
+3. To enable the test strategy rules, copy `ja/.cursor/rules/test-strategy/` (Japanese) and/or `en/.cursor/rules/test-strategy/` (English) into the same `.cursor/rules` folder.
+4. Similarly, copy `ja/.cursor/rules/commit-message-format/` (Japanese) and/or `en/.cursor/rules/commit-message-format/` (English) to enable the commit message format rules.
+5. For PR message format rules, copy `ja/.cursor/rules/pr-message-format/` (Japanese) and/or `en/.cursor/rules/pr-message-format/` (English) into the same folder.
 - Because their application condition is "always", they will be referenced in subsequent chats as long as they exist at the designated path.
 - Both Japanese and English versions are set to `alwaysApply: true`, so you may want to adjust this setting based on your preferred language and whether you want the test rules enabled by default.
 
-For the division of responsibilities and usage patterns between rule files (`.cursor/rules/*.mdc`) and workflow commands (`.cursor/commands/*.md`), see [doc/rules-and-workflows.md](doc/rules-and-workflows.md).
+For the division of responsibilities and usage patterns between rule files (`.cursor/rules/*/RULE.md`) and workflow commands (`.cursor/commands/*.md`), see [en/doc/rules-and-workflows.md](../en/doc/rules-and-workflows.md).
 
 ### Guardrail-related files
 
-- `ja/.cursor/rules/commit-message-format.mdc` / `en/.cursor/rules/commit-message-format.mdc`  
+- `ja/.cursor/rules/commit-message-format/` / `en/.cursor/rules/commit-message-format/`  
   - **Role**: Defines the commit message format (prefix, summary, bullet-list body) and prohibited patterns.
   - **Characteristics**: Based on Conventional Commits, with additional guidelines such as `language`-based language selection and diff-based message generation tailored for this repository.
 
-- `ja/.cursor/rules/pr-message-format.mdc` / `en/.cursor/rules/pr-message-format.mdc`  
+- `ja/.cursor/rules/pr-message-format/` / `en/.cursor/rules/pr-message-format/`  
   - **Role**: Defines the format for PR titles and bodies (prefix-style titles and structured sections such as Overview, Changes, Tests) and prohibited patterns.
   - **Characteristics**: Aligns PR messages with the commit message conventions and encourages structured descriptions that facilitate review and understanding of change intent.
 
-- `ja/.cursor/rules/test-strategy.mdc` / `en/.cursor/rules/test-strategy.mdc`  
+- `ja/.cursor/rules/test-strategy/` / `en/.cursor/rules/test-strategy/`  
   - **Role**: Defines test strategy rules for test implementation and maintenance, including equivalence partitioning, boundary value analysis, and coverage requirements.
   - **Purpose**: Serves as a quality guardrail by requiring corresponding automated tests whenever meaningful changes are made to production code, where reasonably feasible.
 
-- `ja/.cursor/rules/prompt-injection-guard.mdc` / `en/.cursor/rules/prompt-injection-guard.mdc`  
+- `ja/.cursor/rules/prompt-injection-guard/` / `en/.cursor/rules/prompt-injection-guard/`  
   - **Role**: Defines defense rules against **context injection attacks from external sources (RAG, web, files, API responses, etc.)**.
   - **Contents**: Describes guardrails such as restrictions on executing commands originating from external data, the Instruction Quarantine mechanism, the `SECURITY_ALERT` format, and detection of user impersonation attempts.
   - **Characteristics**: Does not restrict the user's own direct instructions; only malicious commands injected via external sources are neutralized.
-  - **Note**: This file has `alwaysApply: true` set in its metadata, but users can still control when these rules are applied via Cursor's UI settings (Always Apply / Apply Intelligently / Apply Manually). See the [operational guide](doc/prompt-injection-guard.md) for details on handling false positives.
+  - **Note**: This file has `alwaysApply: true` set in its metadata, but users can still control when these rules are applied via Cursor's UI settings (Always Apply / Apply Intelligently / Apply Manually). See the [operational guide](../en/doc/prompt-injection-guard.md) for details on handling false positives.
 
-- `doc/custom_instruction_plan_prompt_injection.md`  
+- [en/doc/custom_instruction_plan_prompt_injection.md](../en/doc/custom_instruction_plan_prompt_injection.md)  
   - **Role**: Design and threat analysis document for external context injection defense.
   - **Contents**: Organizes attack categories (A-01–A-09) via external sources, corresponding defense requirements (R-01–R-08), design principles for the external data control layer, and validation/operations planning.
   - **Update**: Fully revised in November 2024 to focus on external-source attacks.

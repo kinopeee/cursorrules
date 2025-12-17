@@ -5,6 +5,44 @@
 [🌏 Back to Top](../README.md) | [🇯🇵 日本語](../ja/CHANGELOG.md)
 
 This file records the update history of the cursorrules v5 project.
+
+## Version 4.4 (2025-12-17)
+
+### Highlights
+
+#### 1. Rule file format migration (Cursor 2.2+ compatible)
+
+- Migrated from `.mdc` format to new folder-based format (`rule-name/RULE.md`)
+- Aligned with Cursor 2.2+ recommended format for improved readability and maintainability
+- Each rule is now managed as a folder, enabling future addition of scripts and resources
+
+#### 2. Updated document and command reference paths
+
+- Updated rule references in README (root/ja/en) to new format
+- Updated reference paths in workflow commands (`.cursor/commands/*.md`)
+- Updated references in operational guides (`en/doc/rules-and-workflows.md`, `en/doc/prompt-injection-guard.md`)
+- Updated file format descriptions in translation guide (`TRANSLATION_GUIDE.md`)
+
+#### 3. Migrated rule files
+
+The following rules have been migrated to the new format:
+
+| Old format | New format |
+|------------|------------|
+| `v5.mdc` | `v5/RULE.md` |
+| `commit-message-format.mdc` | `commit-message-format/RULE.md` |
+| `pr-message-format.mdc` | `pr-message-format/RULE.md` |
+| `test-strategy.mdc` | `test-strategy/RULE.md` |
+| `prompt-injection-guard.mdc` | `prompt-injection-guard/RULE.md` |
+
+#### 4. v5 coding support rule improvements
+
+- **Standalone usage**: Removed dependency on workspace common rules, enabling independent use
+- **Abstracted tool names**: Changed from specific tool names (`read_file`, `apply_patch`, etc.) to abstract operation types (`read/search`, `apply diff`), making the rule applicable across different environments
+- **Clarified task judgment**: Added "when in doubt, treat as 🟡 standard task"
+- **Simplified rule priority**: Explicitly stated the principle of "prioritize more specific/restrictive clauses" in case of conflicts
+- **Improved section structure**: Changed from "Task classification and reasoning depth" to "Task classification and standard flow", integrating execution flows
+
 ## Version 4.3 (2025-11-29)
 
 ### Highlights
@@ -20,7 +58,7 @@ This file records the update history of the cursorrules v5 project.
 - Added new `prompt-injection-guard.mdc` rule file
 - Added context-based detection and judgment criteria
 - Provides defense against instruction execution from external file references
-- Added operational guide documentation (`doc/prompt-injection-guard.md`)
+- Added operational guide documentation (`en/doc/prompt-injection-guard.md`)
 
 #### 3. Refreshed README
 
@@ -44,7 +82,7 @@ This file records the update history of the cursorrules v5 project.
 #### 2. Separated rules and workflows and added documentation
 
 - Separated rule definitions and workflow (custom command) definitions and organized them
-- Added documentation explaining best practices for rules and workflows (doc/rules-and-workflows.md)
+- Added documentation explaining best practices for rules and workflows (en/doc/rules-and-workflows.md)
 
 ## Version 4.1 (2025-11-15)
 

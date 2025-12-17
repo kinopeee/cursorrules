@@ -79,7 +79,7 @@ git push -u origin "$BRANCH"
 
 ## Notes
 
-- Commit message formatting and generation principles should follow `.cursor/rules/commit-message-format.mdc`.
+- Commit message formatting and generation principles should follow `.cursor/rules/commit-message-format/RULE.md`.
 - Always review diffs with `git status` or `git diff` before executing this command.
 
 

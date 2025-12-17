@@ -96,5 +96,5 @@
 
 ---
 
-本設計文書は、`.cursor/rules/prompt-injection-guard.mdc`の実装ルールの背景となる脅威分析と設計思想をまとめたものです。実際の防御ルールは`.cursor/rules/`フォルダのMDCファイルを参照してください。
+本設計文書は、`.cursor/rules/prompt-injection-guard/RULE.md`の実装ルールの背景となる脅威分析と設計思想をまとめたものです。実際の防御ルールは`.cursor/rules/`フォルダのルールディレクトリを参照してください。
 
